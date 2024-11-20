@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-genescopeamplify-dev-ec991-authRole",
+      "UnauthRoleArn": "arn:aws:iam::891612581610:role/amplify-genescopeamplify-dev-ec991-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::891612581610:role/amplify-genescopeamplify-dev-ec991-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-genescopeamplify-dev-ec991-deployment",
+      "UnauthRoleName": "amplify-genescopeamplify-dev-ec991-unauthRole",
+      "StackName": "amplify-genescopeamplify-dev-ec991",
+      "StackId": "arn:aws:cloudformation:us-east-1:891612581610:stack/amplify-genescopeamplify-dev-ec991/ddb4bef0-a77f-11ef-8fb5-0affd2617087",
+      "AmplifyAppId": "d2d9l0fixwua4d"
+    },
+    "categories": {
+      "auth": {
+        "genescopeamplifybefdd2a5": {}
+      }
+    }
+  }
+}
