@@ -91,6 +91,11 @@ html, body, .App {
   font-size: 24px;
 }
 
+.info-box p {
+  margin-bottom: 20px; /* Add space between paragraphs */
+  line-height: 1.6; /* Adjust line height for better readability */
+}
+
 .info-box {
   width: 80%;
   padding: 20px;
@@ -99,6 +104,4 @@ html, body, .App {
   text-align: center;
   color: #6c7a9c;
   font-size: 16px;
-  overflow: auto; /* Allow scrolling within the info box if content overflows */
-  max-height: 400px; /* Optional: Limit the height of the info box */
 }
