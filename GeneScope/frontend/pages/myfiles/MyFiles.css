@@ -1,0 +1,133 @@
+/* MyFiles.css */
+
+.file-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures content is distributed vertically */
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    width: 100vw;   /* Full width */
+    background-color: #edf3ff; /* Matches the background color */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-15%); /* Adjust for centering */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    height: 120px;
+    margin-top: 10px;
+  }
+  
+  .tabs-wrapper {
+    position: absolute; /* Change to absolute positioning */
+    top: 30%; /* Align to the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-30%); /* Adjust for centering */
+    display: flex;
+    width: 30%; /* Adjust the width as needed */
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .tabs-background {
+    position: absolute;
+    width: 90%;
+    height: 70px;
+    background-color: #d7e5ff;
+    border-radius: 50px;
+    z-index: 0;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    z-index: 1; /* Ensures the buttons appear above the background */
+  }
+  
+  .tab-button {
+    background-color: #d7e5ff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6b77a1;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .tab-button.active {
+    background-color: #a6c8ff;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .file-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(calc(-30% + 27px));
+  }
+  
+  .file-item {
+    text-align: center;
+    font-size: 14px;
+    color: #6b77a1;
+  }
+  
+  .file-icon {
+    width: 60px;
+    height: 80px;
+    background-color: #d7e5ff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    font-size: 28px;
+    color: #6b77a1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .file-icon:hover {
+    background-color: #a6c8ff;
+    transform: scale(1.1);
+    color: #ffffff;
+  }
+  
+  .logout {
+    text-align: right;
+    width: 100%; /* Ensure it aligns to the far right */
+  }
+  
+  .logout-button {
+    background: none;
+    border: none;
+    color: #6b77a1;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .logout-button:hover {
+    color: #a6c8ff;
+  }
+  

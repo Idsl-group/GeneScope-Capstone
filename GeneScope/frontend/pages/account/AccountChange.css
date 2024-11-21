@@ -1,0 +1,97 @@
+/* Full-width container for the AccountChange content */
+.update-password-container {
+    margin-left: 240px; /* Matches the Navbar's fixed width */
+    width: calc(100vw - 240px); /* Takes the remaining space after the navbar */
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7faff; /* Matches the design background */
+    font-family: "Arial", sans-serif;
+    padding: 2rem;
+  }
+  
+  /* Logo container */
+  .logo-container {
+    margin-bottom: 400px; /* Adjust spacing between logo and title */
+  }
+  
+  .logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 20px; /* Adds space below the logo */
+  }
+  
+  /* Title */
+  .update-password-title {
+    font-size: 24px;
+    color: #5a67d8;
+    margin-bottom: 30px; /* Adds space between the title and the form */
+    text-align: center;
+  }
+  
+  /* Form container */
+  .update-password-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Fills the container */
+    max-width: 400px; /* Optional: Restrict the max width */
+  }
+  
+  /* Input fields */
+  .password-input {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #4a5568;
+    background-color: #ffffff;
+  }
+  
+  .password-input:focus {
+    border-color: #5a67d8;
+    outline: none;
+    box-shadow: 0 0 5px rgba(90, 103, 216, 0.5);
+  }
+  
+  /* Confirm button */
+  .confirm-button {
+    padding: 12px;
+    background-color: #5a67d8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button:hover {
+    background-color: #434d9a;
+  }
+  
+  /* Container for the Logout Button */
+  .logout-button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  /* Logout Button Styling */
+  .logout-button {
+    padding: 10px 20px;
+    background-color: #5a67d8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #434d9a;
+  }
+  

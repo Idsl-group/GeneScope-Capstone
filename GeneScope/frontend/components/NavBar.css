@@ -1,0 +1,66 @@
+/* src/Navbar.css */
+
+.navbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #3a4b7a; /* Darker background for a more modern look */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    z-index: 1000;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info {
+    font-size: 14px;
+    color: #d1d8ff;
+    font-weight: 300;
+    margin-top: 4px;
+}
+
+.nav-button {
+    padding: 12px 15px;
+    background-color: #556ab3; /* Slightly darker for button contrast */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    width: 100%;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #7a8dc9;
+    transform: translateX(5px); /* Adds a slide effect on hover */
+}
+
+.nav-button:active {
+    transform: translateX(8px);
+}
+
+.nav-button:not(:last-child) {
+    margin-bottom: 10px; /* Adds space between buttons */
+}
+.account-logo {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    padding-bottom: 3px;
+}
