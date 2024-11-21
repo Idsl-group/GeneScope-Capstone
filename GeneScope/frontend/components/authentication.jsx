@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Auth } from 'aws-amplify'; // Correct AWS Amplify import
+
+import * as Amplify from 'aws-amplify';
+
+// Use Auth as Amplify.Auth
+const { Auth } = Amplify;
 
 export default function Authentication({ onAuthSuccess }) {
   const [authState, setAuthState] = useState('signin'); // Manage sign-in or sign-up state
