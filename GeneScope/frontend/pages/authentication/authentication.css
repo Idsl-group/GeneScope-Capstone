@@ -1,0 +1,18 @@
+/* authentication.css */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: #f2f6ff; /* Optional: Background color */
+}
+
+.amplify-authenticator {
+  width: 100%; /* Ensure responsive width */
+  max-width: 400px; /* Limit width to avoid stretching */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+  padding: 20px;
+  background-color: #ffffff; /* Optional: White background */
+  border-radius: 8px; /* Optional: Rounded corners */
+}

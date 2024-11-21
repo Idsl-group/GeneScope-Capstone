@@ -1,16 +1,18 @@
-import React from 'react';
+import React  from 'react';
 import './HomePage.css';
 import NavBar from '../../components/NavBar'; // Corrected NavBar import
 import { useNavigate } from 'react-router-dom';
 import GeneScopeLogo from '../../assets/GenescopeLogo.png';
-
-//onClick={() => navigate('/login')}
-
+import { signOut } from "aws-amplify/auth"
 
 function HomePage() {
   const navigate = useNavigate();
+  async function handleSignOut() {
+    await signOut()
+  }
 
   return (
+    
     <div className="homepage">
       {<NavBar />}
       <main className="content">
@@ -37,11 +39,13 @@ function HomePage() {
               Moreover, the current platforms often lack AI-driven insights to help users interpret complex results from clustering and scoring algorithms. The ability to provide meaningful, human-readable summaries or visualizations based on AI analysis would enhance the user experience and bridge the gap between raw data and actionable conclusions.
               <br></br> <br></br>
               Our proposed solution, GeneScope, addresses these challenges by building an integrated, AI-powered DNA analysis platform. It offers users the ability to upload DNA sequence files, track their processing, receive AI-driven analysis, and download the results. This system will leverage AI models to generate insights, providing users with detailed and interpretable feedback based on the clustering and scoring results, all within a simple and intuitive web interface.
-
             </p>
+            
           </div>
         </section>
+        <button type="button" onClick={handleSignOut}>Log Out</button>
       </main>
+      
     </div>
   );
 }
