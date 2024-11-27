@@ -1,8 +1,8 @@
 // src/Navbar.js
 
-import React from 'react';
-import './Navbar.css';
-import AccountLogo from '../assets/AccountLogo.svg';
+import React from "react";
+import "./Navbar.css";
+import AccountLogo from "../assets/AccountLogo.svg";
 
 function Navbar({ isLoggedIn }) {
   console.log("isLoggedIn:test", isLoggedIn); // Debugging
@@ -13,7 +13,11 @@ function Navbar({ isLoggedIn }) {
         Genescope
         {isLoggedIn && (
           <div className="user-info">
-            <img src={AccountLogo} alt="Account Logo" className="account-logo" />
+            <img
+              src={AccountLogo}
+              alt="Account Logo"
+              className="account-logo"
+            />
             Apurva Narayan
           </div>
         )}
