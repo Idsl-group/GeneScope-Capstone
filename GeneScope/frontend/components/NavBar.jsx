@@ -1,11 +1,30 @@
-// src/Navbar.js
-
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchAuthSession } from "aws-amplify/auth";
 import "./Navbar.css";
 import AccountLogo from "../assets/AccountLogo.svg";
 
-function Navbar({ isLoggedIn }) {
-  console.log("isLoggedIn:test", isLoggedIn); // Debugging
+function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Function to retrieve the current session
+  const currentSession = async () => {
+    try {
+      const { tokens } = await fetchAuthSession();
+      if (tokens && tokens.accessToken) {
+        setIsLoggedIn(true); // User is signed in
+      } else {
+        setIsLoggedIn(false); // User is not signed in
+      }
+    } catch (err) {
+      console.log("Error fetching session:", err);
+      setIsLoggedIn(false); // Default to not signed in
+    }
+  };
+
+  // Check session when the component mounts
+  useEffect(() => {
+    currentSession();
+  }, []);
 
   return (
     <div className="navbar">
@@ -18,10 +37,11 @@ function Navbar({ isLoggedIn }) {
               alt="Account Logo"
               className="account-logo"
             />
-            Apurva Narayan
+            <span>Welcome, User</span>
           </div>
         )}
       </div>
+
       <button className="nav-button">Home</button>
       {isLoggedIn ? (
         <>
