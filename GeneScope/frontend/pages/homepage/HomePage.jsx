@@ -1,35 +1,58 @@
-import React from "react";
-import "./HomePage.css";
-import NavBar from "../../components/NavBar"; // Corrected NavBar import
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchAuthSession, signOut } from "aws-amplify/auth";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
-import { signOut, getCurrentUser } from "aws-amplify/auth";
+import Navbar from "../../components/NavBar";
+import "./HomePage.css";
 
 function HomePage() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  async function handleSignOut() {
-    await signOut();
-  }
+  // Check if the user is signed in
+  const checkSession = async () => {
+    try {
+      const { tokens } = await fetchAuthSession();
+      if (tokens && tokens.accessToken) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (err) {
+      console.log("Error checking session:", err);
+      setIsLoggedIn(false);
+    }
+  };
 
-  async function handleCurrentUser() {
-    const { username, userId, signInDetails } = await getCurrentUser();
-    console.log("userId:", userId);
-    console.log("sign-in details:", signInDetails);
-  }
+  // Sign-out functionality
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      setIsLoggedIn(false);
+    } catch (err) {
+      console.error("Error signing out:", err);
+    }
+  };
+
+  // Run session check on component mount
+  useEffect(() => {
+    checkSession();
+  }, []);
 
   return (
     <div className="homepage">
-      {<NavBar />}
+      {/* Conditionally render Navbar */}
+      {isLoggedIn && <Navbar />}
       <main className="content">
-        <header className="header">
+      <header className="header">
           <button
             className="login-signup-button"
-            onClick={() => navigate("/authentication")}
+            onClick={() => (isLoggedIn ? handleSignOut() : navigate("/authentication"))}
           >
-            Login/Sign Up
+            {isLoggedIn ? "Log Out" : "Log In"}
           </button>
         </header>
+
         <section className="about-section">
           <img
             src={GeneScopeLogo} // Replace with actual logo if available
@@ -85,9 +108,6 @@ function HomePage() {
         </section>
         <button type="button" onClick={handleSignOut}>
           Log Out
-        </button>
-        <button type="button" onClick={handleCurrentUser}>
-          Get Current User
         </button>
       </main>
     </div>

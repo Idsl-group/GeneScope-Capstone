@@ -11,8 +11,6 @@ Amplify.configure(awsExports);
 export default function Authentication() {
   const navigate = useNavigate(); // Initialize the navigate function
 
-
-
   return (
     <div className="auth-container">
       <Authenticator>

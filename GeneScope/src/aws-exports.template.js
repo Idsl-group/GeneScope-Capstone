@@ -2,7 +2,7 @@
 // WARNING: This is a template. Replace placeholders with actual values.
 
 const awsmobile = {
-    "aws_project_region": "YOUR_REGION", // e.g., us-east-1
+    "aws_project_region": "YOUR_REGION",
     "aws_cognito_identity_pool_id": "YOUR_IDENTITY_POOL_ID",
     "aws_cognito_region": "YOUR_COGNITO_REGION",
     "aws_user_pools_id": "YOUR_USER_POOL_ID",
