@@ -1,9 +1,11 @@
 import React from "react";
 import "./AccountChange.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
-
-const AccountChange = () => {
+import Navbar from "../../components/NavBar";
+const AccountChange = (isLoggedIn) => {
   return (
+    <div>
+    {isLoggedIn && <Navbar />}
     <div className="update-password-container">
       {/* Top-right Logout Button */}
       <div className="logout-button-container">
@@ -42,6 +44,7 @@ const AccountChange = () => {
         </button>
       </form>
     </div>
+  </div>
   );
 };
 

@@ -33,9 +33,9 @@ function App() {
         <Route path="/authentication" element={<Authentication />} />
         {isLoggedIn && (
           <>
-            <Route path="/fileupload" element={<FileUploadPage />} />
-            <Route path="/myfiles" element={<MyFiles />} />
-            <Route path="/account" element={<AccountChange />} />
+            <Route path="/fileupload" element={<FileUploadPage isLoggedIn={isLoggedIn} />} />
+            <Route path="/myfiles" element={<MyFiles isLoggedIn={isLoggedIn} />} />
+            <Route path="/account" element={<AccountChange isLoggedIn={isLoggedIn} />} />
           </>
         )}
       </Routes>

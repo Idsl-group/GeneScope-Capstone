@@ -37,6 +37,7 @@ function HomePage() {
   // Run session check on component mount
   useEffect(() => {
     checkSession();
+    
   }, []);
 
   return (

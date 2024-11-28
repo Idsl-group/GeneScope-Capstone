@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { fetchAuthSession } from "aws-amplify/auth";
 import "./Navbar.css";
 import AccountLogo from "../assets/AccountLogo.svg";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const navigate = useNavigate();
   // Function to retrieve the current session
   const currentSession = async () => {
     try {
@@ -42,12 +43,12 @@ function Navbar() {
         )}
       </div>
 
-      <button className="nav-button">Home</button>
+      <button className="nav-button" onClick={() => navigate('/')}>Home</button>
       {isLoggedIn ? (
         <>
-          <button className="nav-button">File Upload</button>
-          <button className="nav-button">My Files</button>
-          <button className="nav-button">Account</button>
+          <button className="nav-button" onClick={() => navigate('/fileupload')}>File Upload</button>
+          <button className="nav-button" onClick={() => navigate('/myfiles')}>My Files</button>
+          <button className="nav-button" onClick={() => navigate('/account')}>Account</button>
         </>
       ) : (
         <></>
