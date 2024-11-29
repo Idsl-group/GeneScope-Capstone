@@ -10,8 +10,8 @@ import "./App.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Check session on app load
   const checkSession = async () => {
     try {
       const { tokens } = await fetchAuthSession();
@@ -19,12 +19,18 @@ function App() {
     } catch (err) {
       console.log("Error fetching session:", err);
       setIsLoggedIn(false);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     checkSession();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
@@ -33,9 +39,9 @@ function App() {
         <Route path="/authentication" element={<Authentication />} />
         {isLoggedIn && (
           <>
-            <Route path="/fileupload" element={<FileUploadPage />} />
-            <Route path="/myfiles" element={<MyFiles />} />
-            <Route path="/account" element={<AccountChange />} />
+            <Route path="/fileupload" element={<FileUploadPage isLoggedIn={isLoggedIn} />} />
+            <Route path="/myfiles" element={<MyFiles isLoggedIn={isLoggedIn} />} />
+            <Route path="/account" element={<AccountChange isLoggedIn={isLoggedIn} />} />
           </>
         )}
       </Routes>

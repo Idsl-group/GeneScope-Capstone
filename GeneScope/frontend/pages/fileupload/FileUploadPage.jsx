@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import "./FileUploadPage.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
-
-const FileUploadPage = () => {
+//import { Auth } from "aws-amplify";
+import Navbar from "../../components/NavBar";
+import { useNavigate } from "react-router-dom";
+const FileUploadPage = ({isLoggedIn}) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const navigate = useNavigate();
   const onDrop = (acceptedFiles) => {
     setSelectedFiles([...selectedFiles, ...acceptedFiles]);
   };
@@ -14,17 +16,21 @@ const FileUploadPage = () => {
     setSelectedFiles(selectedFiles.filter((file) => file !== fileToDelete));
   };
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/authentication');
+    }
+  }, [isLoggedIn, navigate]);
 
-  React.useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then(() => setIsLoggedIn(true))
-      .catch(() => setIsLoggedIn(false)); // Not signed in
-  }, []);
+  // useEffect(() => {
+  //   Auth.currentAuthenticatedUser()
+  //     .then(() => setIsLoggedIn(true))
+  //     .catch(() => setIsLoggedIn(false)); // Not signed in
+  // }, []);
 
-  if (!isLoggedIn) {
-    return <Navigate to="/authentication" />;
-  }
+  // if (!isLoggedIn) {
+  //   return navigate('/authentication');
+  // }
 
   const handleSubmission = () => {
     const formData = new FormData();
@@ -48,7 +54,9 @@ const FileUploadPage = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
+    
     <div className="content">
+      {isLoggedIn && <Navbar />}
       <main className="fileUploadPage">
         <img src={GeneScopeLogo} alt="Genescope Logo" className="logo" />
         <div className="dropzone-container">
