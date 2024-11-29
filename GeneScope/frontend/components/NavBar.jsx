@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  // Function to retrieve the current session
+  // Function to retrieve the current sessio
   const currentSession = async () => {
     try {
       const { tokens } = await fetchAuthSession();

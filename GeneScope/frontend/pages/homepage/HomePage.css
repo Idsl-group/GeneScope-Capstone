@@ -13,11 +13,10 @@ html, body, .App {
 
 .homepage {
   display: flex;
-  flex-direction: column; /* Ensure the layout adjusts vertically */
-  min-height: 100vh; /* Make the homepage take at least the full viewport height */
+  flex-direction: row; /* Side-by-side layout for the navbar and content */
+  min-height: 100vh; /* Full viewport height */
   width: 100%;
-  background-color: #f0f4ff;
-  overflow: auto; /* Allow scrolling if content overflows */
+  overflow: hidden; /* Prevents unnecessary scrollbars */
 }
 
 .sidebar {
@@ -48,11 +47,15 @@ html, body, .App {
 
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 240px; /* Add this line to create space for the navbar */
+  justify-content: flex-start; /* Adjust as needed for vertical alignment */
+  margin-left: 240px; /* Matches the navbar width */
+  background-color: #f0f4ff; /* Same background color to blend seamlessly */
+  height: 100vh; /* Ensures it takes up the full height */
+  overflow: auto; /* Allows scrolling if necessary */
 }
 
 .header {
