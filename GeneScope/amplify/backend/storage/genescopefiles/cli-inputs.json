@@ -1,0 +1,18 @@
+{
+  "resourceName": "genescopefiles",
+  "policyUUID": "8eb43ff6",
+  "bucketName": "genescopefiles",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger12a53398",
+  "groupAccess": {}
+}
