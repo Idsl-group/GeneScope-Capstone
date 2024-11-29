@@ -5,9 +5,11 @@ import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 //import { Auth } from "aws-amplify";
 import Navbar from "../../components/NavBar";
 import { useNavigate } from "react-router-dom";
-const FileUploadPage = ({isLoggedIn}) => {
+
+const FileUploadPage = ({ isLoggedIn }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const navigate = useNavigate();
+  
   const onDrop = (acceptedFiles) => {
     setSelectedFiles([...selectedFiles, ...acceptedFiles]);
   };
@@ -16,11 +18,11 @@ const FileUploadPage = ({isLoggedIn}) => {
     setSelectedFiles(selectedFiles.filter((file) => file !== fileToDelete));
   };
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/authentication');
-    }
-  }, [isLoggedIn, navigate]);
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     navigate('/authentication');
+  //   }
+  // }, [isLoggedIn, navigate]);
 
   // useEffect(() => {
   //   Auth.currentAuthenticatedUser()
@@ -56,7 +58,7 @@ const FileUploadPage = ({isLoggedIn}) => {
   return (
     
     <div className="content">
-      {isLoggedIn && <Navbar />}
+      <Navbar isLoggedIn={isLoggedIn} />
       <main className="fileUploadPage">
         <img src={GeneScopeLogo} alt="Genescope Logo" className="logo" />
         <div className="dropzone-container">

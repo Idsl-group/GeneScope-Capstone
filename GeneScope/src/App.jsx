@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { fetchAuthSession } from "aws-amplify/auth";
 import HomePage from "../frontend/pages/homepage/HomePage";
 import Authentication from "../frontend/pages/authentication/authentication";
@@ -35,15 +35,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/authentication" element={<Authentication />} />
-        {isLoggedIn && (
-          <>
-            <Route path="/fileupload" element={<FileUploadPage isLoggedIn={isLoggedIn} />} />
-            <Route path="/myfiles" element={<MyFiles isLoggedIn={isLoggedIn} />} />
-            <Route path="/account" element={<AccountChange isLoggedIn={isLoggedIn} />} />
-          </>
-        )}
+      <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/fileupload" element={isLoggedIn ? <FileUploadPage isLoggedIn={isLoggedIn} /> : <Navigate to="/authentication" />} />
+        <Route path="/myfiles" element={isLoggedIn ? <MyFiles isLoggedIn={isLoggedIn} /> : <Navigate to="/authentication" />} />
+        <Route path="/account" element={isLoggedIn ? <AccountChange isLoggedIn={isLoggedIn} /> : <Navigate to="/authentication" />} />
       </Routes>
     </Router>
   );

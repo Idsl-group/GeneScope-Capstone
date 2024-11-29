@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { fetchAuthSession } from "aws-amplify/auth";
+import React from "react";
 import "./Navbar.css";
 import AccountLogo from "../assets/AccountLogo.svg";
 import { useNavigate } from "react-router-dom";
 
-function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Navbar({ isLoggedIn }) {
   const navigate = useNavigate();
-  // Function to retrieve the current sessio
-  const currentSession = async () => {
-    try {
-      const { tokens } = await fetchAuthSession();
-      if (tokens && tokens.accessToken) {
-        setIsLoggedIn(true); // User is signed in
-      } else {
-        setIsLoggedIn(false); // User is not signed in
-      }
-    } catch (err) {
-      console.log("Error fetching session:", err);
-      setIsLoggedIn(false); // Default to not signed in
-    }
-  };
-
-  // Check session when the component mounts
-  useEffect(() => {
-    currentSession();
-  }, []);
 
   return (
     <div className="navbar">

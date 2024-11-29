@@ -43,7 +43,7 @@ function HomePage() {
   return (
     <div className="homepage">
       {/* Conditionally render Navbar */}
-      {isLoggedIn && <Navbar />}
+      <Navbar isLoggedIn={isLoggedIn} />
       <main className="content">
       <header className="header">
           <button

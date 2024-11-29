@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./MyFiles.css";
 import GeneScopeLogo from '../../assets/GenescopeLogo.png';
 import Navbar from "../../components/NavBar";
-const MyFiles = (isLoggedIn) => {
+
+const MyFiles = ({ isLoggedIn }) => {
   const [activeTab, setActiveTab] = useState("All Files");
 
   const filesData = {
@@ -13,7 +14,7 @@ const MyFiles = (isLoggedIn) => {
 
   return (
     <div className="file-section">
-      {isLoggedIn && <Navbar />}
+      <Navbar isLoggedIn={isLoggedIn} />
       {/* Logo */}
       <div className="logo-container">
       <img

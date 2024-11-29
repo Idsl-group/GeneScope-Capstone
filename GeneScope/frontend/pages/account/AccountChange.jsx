@@ -2,10 +2,10 @@ import React from "react";
 import "./AccountChange.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
-const AccountChange = (isLoggedIn) => {
+const AccountChange = ({ isLoggedIn }) => {
   return (
-    <div>
-    {isLoggedIn && <Navbar />}
+    <div className="account-change-page">
+    <Navbar isLoggedIn={isLoggedIn}/>
     <div className="update-password-container">
       {/* Top-right Logout Button */}
       <div className="logout-button-container">
