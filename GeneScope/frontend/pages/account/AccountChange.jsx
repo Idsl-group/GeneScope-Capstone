@@ -2,15 +2,17 @@ import React from "react";
 import "./AccountChange.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
-const AccountChange = ({ isLoggedIn }) => {
+
+const AccountChange = ({ isLoggedIn, setIsLoggedIn }) => {
+
   return (
     <div className="account-change-page">
-    <Navbar isLoggedIn={isLoggedIn}/>
+    <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     <div className="update-password-container">
       {/* Top-right Logout Button */}
-      <div className="logout-button-container">
+      {/* <div className="logout-button-container">
         <button className="logout-button">Logout</button>
-      </div>
+      </div> */}
 
       {/* Logo and Title */}
       <div className="logo-container">

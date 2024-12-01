@@ -6,7 +6,7 @@ import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
-const FileUploadPage = ({ isLoggedIn }) => {
+const FileUploadPage = ({ isLoggedIn, setIsLoggedIn}) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const navigate = useNavigate();
   
@@ -58,7 +58,7 @@ const FileUploadPage = ({ isLoggedIn }) => {
   return (
     
     <div className="content">
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <main className="fileUploadPage">
         <img src={GeneScopeLogo} alt="Genescope Logo" className="logo" />
         <div className="dropzone-container">

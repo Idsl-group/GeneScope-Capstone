@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import AccountLogo from "../assets/AccountLogo.svg";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "aws-amplify/auth";
 
-function Navbar({ isLoggedIn }) {
+function Navbar({ isLoggedIn, setIsLoggedIn}) {
   const navigate = useNavigate();
+
+  // Sign-out functionality
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      setIsLoggedIn(false);
+      navigate('/');
+    } catch (err) {
+      console.error("Error signing out:", err);
+    }
+  };
 
   return (
     <div className="navbar">
@@ -32,6 +44,7 @@ function Navbar({ isLoggedIn }) {
       ) : (
         <></>
       )}
+      <button className="nav-button" onClick={() => (isLoggedIn ? handleSignOut() : navigate("/authentication"))}>{isLoggedIn ? "Log Out" : "Log In"}</button>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import "./MyFiles.css";
 import GeneScopeLogo from '../../assets/GenescopeLogo.png';
 import Navbar from "../../components/NavBar";
 
-const MyFiles = ({ isLoggedIn }) => {
+const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [activeTab, setActiveTab] = useState("All Files");
 
   const filesData = {
@@ -14,7 +14,7 @@ const MyFiles = ({ isLoggedIn }) => {
 
   return (
     <div className="file-section">
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       {/* Logo */}
       <div className="logo-container">
       <img

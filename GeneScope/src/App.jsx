@@ -37,9 +37,9 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/fileupload" element={isLoggedIn ? <FileUploadPage isLoggedIn={isLoggedIn} /> : <Navigate to="/authentication" />} />
-        <Route path="/myfiles" element={isLoggedIn ? <MyFiles isLoggedIn={isLoggedIn} /> : <Navigate to="/authentication" />} />
-        <Route path="/account" element={isLoggedIn ? <AccountChange isLoggedIn={isLoggedIn} /> : <Navigate to="/authentication" />} />
+        <Route path="/fileupload" element={isLoggedIn ? <FileUploadPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} />
+        <Route path="/myfiles" element={isLoggedIn ? <MyFiles isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} />
+        <Route path="/account" element={isLoggedIn ? <AccountChange isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} />
       </Routes>
     </Router>
   );

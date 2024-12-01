@@ -5,9 +5,8 @@ import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
 import "./HomePage.css";
 
-function HomePage() {
+function HomePage({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Check if the user is signed in
   const checkSession = async () => {
@@ -43,16 +42,16 @@ function HomePage() {
   return (
     <div className="homepage">
       {/* Conditionally render Navbar */}
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <main className="content">
-      <header className="header">
+      {/* <header className="header">
           <button
             className="login-signup-button"
             onClick={() => (isLoggedIn ? handleSignOut() : navigate("/authentication"))}
           >
             {isLoggedIn ? "Log Out" : "Log In"}
           </button>
-        </header>
+        </header> */}
 
         <section className="about-section">
           <img
@@ -107,9 +106,6 @@ function HomePage() {
             </p>
           </div>
         </section>
-        <button type="button" onClick={handleSignOut}>
-          Log Out
-        </button>
       </main>
     </div>
   );
