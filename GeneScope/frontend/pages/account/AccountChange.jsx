@@ -7,6 +7,14 @@ const AccountChange = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <div className="account-change-page">
+      {/* Logo and Title */}
+      <div className="logo-container">
+        <img
+          src={GeneScopeLogo}
+          alt="Genescope Logo"
+          className="logo-image"
+        />
+      </div>
     <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     <div className="update-password-container">
       {/* Top-right Logout Button */}
@@ -14,14 +22,6 @@ const AccountChange = ({ isLoggedIn, setIsLoggedIn }) => {
         <button className="logout-button">Logout</button>
       </div> */}
 
-      {/* Logo and Title */}
-      <div className="logo-container">
-        <img
-          src={GeneScopeLogo}
-          alt="Genescope Logo"
-          className="logo"
-        />
-      </div>
       <h1 className="update-password-title">Update Password</h1>
 
       {/* Form */}

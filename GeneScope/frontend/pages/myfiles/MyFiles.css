@@ -7,7 +7,7 @@
     align-items: center;
     height: 100vh; /* Full viewport height */
     width: 100vw;   /* Full width */
-    background-color: #edf3ff; /* Matches the background color */
+    background-color: #f7faff; /* Matches the background color */
     padding: 20px;
     box-sizing: border-box;
   }
@@ -24,7 +24,13 @@
     height: 120px;
     margin-top: 10px;
   }
-  
+  h3 {
+    color: #6b77a1;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
   .tabs-wrapper {
     position: absolute; /* Change to absolute positioning */
     top: 30%; /* Align to the top */
@@ -54,7 +60,7 @@
   }
   
   .tab-button {
-    background-color: #d7e5ff;
+    background-color: #6b77a1;
     border: none;
     border-radius: 25px;
     padding: 10px 20px;
@@ -83,6 +89,7 @@
     left: 50%;
     top: 50%;
     transform: translateX(calc(-30% + 27px));
+    background-color: #d7e5ff;
   }
   
   .file-item {

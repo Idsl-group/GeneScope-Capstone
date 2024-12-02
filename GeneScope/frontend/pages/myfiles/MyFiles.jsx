@@ -85,10 +85,11 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
       {/* Logo */}
       <div className="logo-container">
-        <img src={GeneScopeLogo} alt="Genescope Logo" className="logo" />
+        <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
       </div>
 
       {/* Files List */}
+      <div className="file-grid-container">
       <div className="file-grid">
         <h2>All Files</h2>
         {fileNames.length > 0 ? (
@@ -105,8 +106,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
           ))
         ) : (
-          <div>No files available.</div>
+          <h3>No files available.</h3>
         )}
+      </div>
       </div>
     </div>
   );

@@ -12,15 +12,11 @@
     padding: 2rem;
   }
   
-  /* Logo container */
-  .logo-container {
-    margin-bottom: 400px; /* Adjust spacing between logo and title */
-  }
-  
-  .logo {
-    width: 150px; /* Adjust size as needed */
-    height: auto;
-    margin-bottom: 20px; /* Adds space below the logo */
+
+  .logo-image {
+    width: 300px;
+    height: 300px;
+    margin: 0px;
   }
   
   /* Title */

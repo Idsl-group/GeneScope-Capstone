@@ -53,7 +53,7 @@ html, body, .App {
   align-items: center;
   justify-content: flex-start; /* Adjust as needed for vertical alignment */
   margin-left: 240px; /* Matches the navbar width */
-  background-color: #f0f4ff; /* Same background color to blend seamlessly */
+  background-color: #f7faff; /* Same background color to blend seamlessly */
   height: 100vh; /* Ensures it takes up the full height */
   overflow: auto; /* Allows scrolling if necessary */
 }
