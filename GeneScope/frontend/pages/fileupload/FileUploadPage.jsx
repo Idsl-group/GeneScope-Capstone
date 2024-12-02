@@ -1,91 +1,60 @@
 import React, { useState, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
-import "./FileUploadPage.css";
-import GeneScopeLogo from "../../assets/GenescopeLogo.png";
-//import { Auth } from "aws-amplify";
-import Navbar from "../../components/NavBar";
+import { FileUploader } from "@aws-amplify/ui-react-storage";
+import { getCurrentUser } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/NavBar";
+import GeneScopeLogo from "../../assets/GenescopeLogo.png";
+import "./FileUploadPage.css";
 
-const FileUploadPage = ({ isLoggedIn, setIsLoggedIn}) => {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const navigate = useNavigate();
-  
-  const onDrop = (acceptedFiles) => {
-    setSelectedFiles([...selectedFiles, ...acceptedFiles]);
-  };
+const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
+  const [userEmail, setUserEmail] = useState("");
 
-  const handleDelete = (fileToDelete) => {
-    setSelectedFiles(selectedFiles.filter((file) => file !== fileToDelete));
-  };
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      try {
+        const { signInDetails } = await getCurrentUser();
+        console.log("User Email:", signInDetails.loginId);
+        setUserEmail(signInDetails.loginId);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Error fetching user email:", error);
+        setIsLoggedIn(false);
+      }
+    };
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     navigate('/authentication');
-  //   }
-  // }, [isLoggedIn, navigate]);
+    fetchUserEmail();
+  }, [setIsLoggedIn]);
 
-  // useEffect(() => {
-  //   Auth.currentAuthenticatedUser()
-  //     .then(() => setIsLoggedIn(true))
-  //     .catch(() => setIsLoggedIn(false)); // Not signed in
-  // }, []);
-
-  // if (!isLoggedIn) {
-  //   return navigate('/authentication');
-  // }
-
-  const handleSubmission = () => {
-    const formData = new FormData();
-    selectedFiles.forEach((file) => {
-      formData.append("Files", file);
-    });
-
-    fetch("YOUR_API_ENDPOINT", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("Success:", result);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  if (!isLoggedIn) {
+    return (
+      <div>
+        <h2>Please log in to upload files.</h2>
+      </div>
+    );
+  }
 
   return (
-    
     <div className="content">
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="fileUploadPage">
         <img src={GeneScopeLogo} alt="Genescope Logo" className="logo" />
-        <div className="dropzone-container">
-          <div {...getRootProps()} className="dropzone">
-            <input {...getInputProps()} />
-            <div className="dropzone-icon">⬆️</div>
-            <p>Drag & drop files here, or click to select files</p>
-          </div>
-          <div className="file-list-container">
-            <div className="file-list">
-              {selectedFiles.map((file, index) => (
-                <div className="file-item" key={index}>
-                  <div className="file-item-icon">📄</div>
-                  <span>{file.name}</span>
-                  <button
-                    className="delete-button"
-                    onClick={() => handleDelete(file)}
-                  >
-                    🗑️
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button className="upload-button" onClick={handleSubmission}>
-              Upload
-            </button>
-          </div>
+        <h2>Upload Your Files</h2>
+        <div className="file-uploader-container">
+          <FileUploader
+            acceptedFileTypes={["*/*"]}
+            accessLevel="public"
+            path={`${userEmail}/`}
+            maxFileCount={5}
+            isResumable
+            onSuccess={(result) => {
+              console.log("File uploaded successfully:", result);
+              alert("File uploaded successfully!");
+            }}
+            onError={(error) => {
+              console.error("Error uploading file:", error);
+              alert("File upload failed.");
+            }}
+          />
         </div>
       </main>
     </div>
