@@ -9,13 +9,6 @@
     background-color: #f0f4ff;
   }
 
-/* DNA Icon */
-.logo {
-    width: 250px; /* Increase the width */
-    height: auto;
-    margin-bottom: 0px;
-}
-
 /* Page Layout */
 .fileUploadPage {
     flex-direction: column;
@@ -27,65 +20,25 @@
      /* Adjust this value based on the width of your navbar */
 }
 
-/* Container for file list and upload button */
-.file-list-container {
+.file-uploader-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px; /* Adjust the gap as needed */
+    width: 150%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #3a4b7a;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: grey;
+}
+
+.amplify-fileuploader {
     width: 100%;
     margin-bottom: 20px;
-}
-
-/* Dropzone Styles */
-.dropzone {
-    cursor: pointer;
-    margin-bottom: 20px;
-    height: 200px;
-    width: 400px; /* Adjusted to fit the container */
-    transition: background-color 0.3s;
-    background-color: #e2ecff;
-    border-radius: 10px; /* Rounded edges */
-    
-}
-
-.dropzone:hover {
-    background-color: #dce7ff;
-}
-
-.dropzone-icon {
-    font-size: 40px;
-    color: #8ea8ff;
-}
-
-/* File List */
-.file-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.upload-button {
-    padding: 12px 15px;
-    background-color: #556ab3; /* Slightly darker for button contrast */
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
-    text-align: left;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.upload-button:hover {
-    background-color: #7a8dc9;
-    transform: translateX(5px); /* Adds a slide effect on hover */
-}
-
-.upload-button:active {
-    transform: translateX(8px);
 }

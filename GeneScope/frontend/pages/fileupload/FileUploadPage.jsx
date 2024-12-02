@@ -37,8 +37,8 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
     <div className="content">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="fileUploadPage">
-        <img src={GeneScopeLogo} alt="Genescope Logo" className="logo" />
-        <h2>Upload Your Files</h2>
+        <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
+        <h2>Upload DNA/RNA Files</h2>
         <div className="file-uploader-container">
           <FileUploader
             acceptedFileTypes={["*/*"]}
