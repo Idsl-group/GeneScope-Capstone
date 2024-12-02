@@ -16,7 +16,7 @@ html, body, .App {
   flex-direction: row; /* Side-by-side layout for the navbar and content */
   min-height: 100vh; /* Full viewport height */
   width: 100%;
-  overflow: hidden; /* Prevents unnecessary scrollbars */
+  overflow: auto; /* Prevents unnecessary scrollbars */
 }
 
 .sidebar {
