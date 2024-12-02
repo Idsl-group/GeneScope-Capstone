@@ -67,7 +67,9 @@
   .confirm-button:hover {
     background-color: #434d9a;
   }
-  
+  .confirm-button:active {
+    transform: translateX(8px);
+}
   /* Container for the Logout Button */
   .logout-button-container {
     position: absolute;

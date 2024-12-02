@@ -8,6 +8,7 @@
     margin-left: 100px; /* Add this line to create space for the navbar */
     background-color: #f7faff;
     overflow: hidden;
+    margin-left: 240px; /* Matches the navbar width */
   }
 
 /* Page Layout */

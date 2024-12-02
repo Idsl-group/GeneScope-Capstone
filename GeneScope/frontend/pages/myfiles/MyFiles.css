@@ -90,6 +90,7 @@
     top: 50%;
     transform: translateX(calc(-30% + 27px));
     background-color: #d7e5ff;
+    border-radius: 10px;
   }
   
   .file-item {
