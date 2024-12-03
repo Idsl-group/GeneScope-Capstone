@@ -5,11 +5,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 100px; /* Add this line to create space for the navbar */
+    margin-left: 240px; /* Add this line to create space for the navbar */
     background-color: #f7faff;
     overflow: auto;
     overflow-x: hidden;
-    margin-left: 240px; /* Matches the navbar width */
   }
 
 /* Page Layout */
@@ -19,7 +18,8 @@
     justify-content: center; /* Center the content */
     display: flex;
     height: 100vh;
-    width: 100vw;
+    width: calc(100vw - 240px);
+    background-color: #f7faff;
      /* Adjust this value based on the width of your navbar */
 }
 
@@ -28,12 +28,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 150%;
+    width: 90%;
     max-width: 800px;
     padding: 20px;
     background-color: #3a4b7a;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 h2 {
