@@ -9,7 +9,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
   const [fileNames, setFileNames] = useState([]);
 
-  // Fetch the user's email when the component loads
+  // Fetch the user's email when the component loads and set the user as logged in
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
