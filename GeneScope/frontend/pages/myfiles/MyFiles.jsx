@@ -94,7 +94,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       <main className="myFilesPage">
       {/* Logo */}
       <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
-      
+      <h2 className="page-title">My Files</h2>
 
       {/* View Buttons */}
       <div className="view-buttons">

@@ -1,5 +1,4 @@
 /* MyFiles.css */
-
 .file-section {
   flex: 1;
   padding: 20px;
@@ -25,10 +24,9 @@
   .view-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    left: 50%;
+    flex-direction: row;
     align-items: center;
-    padding: auto;
+    padding: 10px;
   }
   
   .view-buttons button {
@@ -103,6 +101,7 @@
   
   .file-grid {
     display: grid;
+    flex-direction: row;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     justify-items: center;
@@ -110,7 +109,6 @@
     align-items: center;
     position: absolute;
     left: 50%;
-    top: 50%;
     transform: translateX(calc(-30% + 27px));
     background-color: #d7e5ff;
     border-radius: 10px;
