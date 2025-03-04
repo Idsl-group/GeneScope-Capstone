@@ -8,8 +8,9 @@ import Navbar from "../../components/NavBar";
 const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
   const [fileNames, setFileNames] = useState([]);
+  const [view, setView] = useState("all"); // State to manage the current view
 
-  // Fetch the user's email when the component loads
+  // Fetch the user's email when the component loads and set the user as logged in
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
@@ -79,37 +80,52 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     );
   }
 
+  // Filter files based on the current view
+  const filteredFiles = fileNames.filter((file) => {
+    if (view === "all") return true;
+    if (view === "waiting") return file.includes("waiting"); // Adjust this condition based on your file naming convention
+    if (view === "processed") return file.includes("processed"); // Adjust this condition based on your file naming convention
+    return false;
+  });
+
   return (
     <div className="file-section">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-
+      <main className="myFilesPage">
       {/* Logo */}
-      <div className="logo-container">
-        <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
+      <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
+      
+
+      {/* View Buttons */}
+      <div className="view-buttons">
+        <button onClick={() => setView("all")}>All Files</button>
+        <button onClick={() => setView("waiting")}>Files Waiting to be Processed</button>
+        <button onClick={() => setView("processed")}>Processed Files</button>
       </div>
 
       {/* Files List */}
       <div className="file-grid-container">
-      <div className="file-grid">
-        <h2>All Files</h2>
-        {fileNames.length > 0 ? (
-          fileNames.map((file, index) => (
-            <div className="file-item" key={index}>
-              <div className="file-icon">📄</div>
-              <span>{file}</span>
-              <button
-                className="delete-button"
-                onClick={() => handleDelete(file)}
-              >
-                Remove
-              </button>
-            </div>
-          ))
-        ) : (
-          <h3>No files available.</h3>
-        )}
+        <div className="file-grid">
+          <h2>{view === "all" ? "All Files" : view === "waiting" ? "Files Waiting to be Processed" : "Processed Files"}</h2>
+          {filteredFiles.length > 0 ? (
+            filteredFiles.map((file, index) => (
+              <div className="file-item" key={index}>
+                <div className="file-icon">📄</div>
+                <span>{file}</span>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(file)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))
+          ) : (
+            <h3>No files available.</h3>
+          )}
+        </div>
       </div>
-      </div>
+    </main>
     </div>
   );
 };
