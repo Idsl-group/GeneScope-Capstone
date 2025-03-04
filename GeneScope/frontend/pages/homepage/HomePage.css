@@ -56,8 +56,6 @@ html, body, .App {
   background-color: #f7faff; 
   height: 100vh; 
   overflow: auto;
-  
-  /* Fix Background Image */
   background-image: url("../../assets/Background.jpg");
   background-size: cover; /* Ensures it stretches to fit */
   background-repeat: no-repeat; /* Prevents repeating */
