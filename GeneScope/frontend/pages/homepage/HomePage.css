@@ -19,7 +19,7 @@ html, body, .App {
   overflow: auto; 
 }
 
-.sidebar {
+/* .sidebar {
   width: 200px;
   background-color: #c7d8ff;
   padding: 20px;
@@ -27,7 +27,7 @@ html, body, .App {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-}
+} */
 
 .logo {
   color: #ffffff;
@@ -51,16 +51,16 @@ html, body, .App {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: center; 
   margin-left: 0px; 
   background-color: #f7faff; 
   height: 100vh; 
   overflow: auto;
   background-image: url("../../assets/Background.jpg");
-  background-size: cover; /* Ensures it stretches to fit */
-  background-repeat: no-repeat; /* Prevents repeating */
-  background-position: center; /* Centers the image */
-  background-attachment: fixed; /* Keeps it fixed while scrolling */
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  background-attachment: fixed; 
 }
 
 .header {
@@ -102,15 +102,15 @@ html, body, .App {
 }
 
 .logo-image {
-  width: 250px;
+  width: 400px;
   height: auto;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
-.about-section h2 {
+/* .about-section h2 {
   color: #9e9dff;
   font-size: 24px;
-}
+} */
 
 .info-box p {
   margin-bottom: 20px; 
@@ -123,15 +123,23 @@ html, body, .App {
 }
 
 .info-box {
-  width: 80%;
-  padding: 20px;
   background: rgba(226, 236, 255, 0.9);
+  padding: 20px;
   border-radius: 12px;
-  text-align: center;
   color: #334a67;
   font-size: 16px;
+  line-height: 1.6;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
+}
+
+.glass{
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
 }
 
 .cta-button {
@@ -144,6 +152,11 @@ html, body, .App {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   animation: pulse 1.5s infinite alternate;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #3f51b5;
 }
 
 @keyframes pulse {
@@ -153,4 +166,37 @@ html, body, .App {
   to {
     transform: scale(1.05);
   }
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 80%;
+  max-width: 1200px;
+  margin: 60px auto 0 auto;
+  padding: 0; 
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.about-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  max-width: 800px;
+}
+
+.about-content h2 {
+  font-size: 28px;
+  color: #5c6bc0;
+  margin-bottom: 15px;
 }
