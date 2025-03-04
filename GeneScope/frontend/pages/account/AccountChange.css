@@ -1,7 +1,6 @@
 /* Full-width container for the AccountChange content */
 .update-password-container {
-    margin-left: 240px; /* Matches the Navbar's fixed width */
-    width: calc(100vw - 240px); /* Takes the remaining space after the navbar */
+    margin-left: 0px; /* Matches the Navbar's fixed width */
     height: 100vh; /* Full height of the viewport */
     display: flex;
     flex-direction: column;
