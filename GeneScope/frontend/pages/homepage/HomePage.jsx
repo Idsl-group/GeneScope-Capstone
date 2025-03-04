@@ -105,6 +105,9 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
               intuitive web interface.
             </p>
           </div>
+          <button className="cta-button" onClick={() => window.location.href = "https://pubs.acs.org/doi/10.1021/acssynbio.2c00462?fig=fig3&ref=pdf"}>
+            Learn More About GeneScope 🧬
+          </button>
         </section>
       </main>
     </div>
