@@ -89,6 +89,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   });
 
   return (
+    <div className="content">
     <div className="file-section">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="myFilesPage">
@@ -126,6 +127,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
       </div>
     </main>
+    </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Navbar from "../../components/NavBar";
 const AccountChange = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
+    <div className="content">
     <div className="account-change-page">
     <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     <div className="update-password-container">
@@ -39,6 +40,7 @@ const AccountChange = ({ isLoggedIn, setIsLoggedIn }) => {
         </button>
       </form>
     </div>
+  </div>
   </div>
   );
 };
