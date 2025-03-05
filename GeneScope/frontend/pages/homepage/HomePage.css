@@ -101,10 +101,22 @@ html, body, .App {
   }
 }
 
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
 .logo-image {
   width: 400px;
   height: auto;
-  /* margin-bottom: 20px; */
+
+  /* 360 spinning */
+  animation: spin 5s linear infinite; 
+  transform-style: preserve-3d;
 }
 
 /* .about-section h2 {
