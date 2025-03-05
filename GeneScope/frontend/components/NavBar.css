@@ -67,9 +67,9 @@
 
 /* Floating Navbar Styling */
 .floating-navbar {
-    display: flex;
+    display: inline-flex; 
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background: rgba(255, 255, 255, 0.9);
     padding: 15px 30px;
     border-radius: 50px;
@@ -78,8 +78,8 @@
     top: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 75%;
-    max-width: 1100px;
+    width: auto;
+    max-width: 90%; 
     z-index: 1000;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -91,6 +91,17 @@
     color: #3a4b7a;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+/* Normal Nav Buttons (Desktop) */
+.nav-links {
+    display: flex; /* By default, show in a row on large screens */
+    align-items: center;
+  }
+  
+  /* The .active class is toggled by React for mobile. We’ll override it later. */
+.nav-links.active {
+/* Overridden in mobile styles */
 }
 
 .nav-button {
@@ -130,15 +141,66 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
+/* Hamburger Icon: Hidden on large screens */
+.hamburger {
+    display: none; 
+    flex-direction: column; 
+    justify-content: space-between;
+    width: 25px;
+    height: 20px; 
+    cursor: pointer;
+    margin-left: 20px; /* spacing from brand */
+}
+  
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #3a4b7a; 
+    border-radius: 3px;
+}
+
+/* Responsive: show hamburger, and switch nav to a side-drawer approach */
 @media (max-width: 768px) {
-    .floating-navbar {
-        flex-direction: column;
-        width: 90%;
-        padding: 10px;
+    /* Show the hamburger icon; Hide the nav-links in a side drawer */
+    .hamburger {
+      display: flex; /* now visible on small screens */
     }
-    
+  
+    .nav-links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100vh;
+      background-color: white;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+      flex-direction: column; /* stack buttons vertically */
+      padding: 80px 20px;      /* push them down so hamburger is above */
+      transform: translateX(-120%); 
+      transition: transform 0.3s ease;
+      z-index: 9999;  
+    }
+  
+    /* Slide the drawer into view when .active is toggled */
+    .nav-links.active {
+        /* display: flex; */
+        transform: translateX(0);
+    }
+  
+    /* The main navbar now only has the logo + hamburger in a row */
+    .floating-navbar {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+    }
+  
+    /* If you want to style the side-drawer buttons differently, you can do that below */
     .nav-button {
-        width: 100%;
-        margin: 5px 0;
+      margin: 15px 0;
+      width: 100%;
     }
 }
+
+
+
