@@ -118,6 +118,13 @@
     text-align: center;
     font-size: 14px;
     color: #6b77a1;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .file-item.selected {
+    background-color: #e6f3ff;
+    border: 1px solid #1890ff;
   }
   
   .file-icon {
@@ -158,5 +165,29 @@
   
   .logout-button:hover {
     color: #a6c8ff;
+  }
+  
+  .action-buttons {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .start-job-button {
+    padding: 8px 16px;
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .start-job-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .start-job-button:hover:not(:disabled) {
+    background-color: #40a9ff;
   }
   
