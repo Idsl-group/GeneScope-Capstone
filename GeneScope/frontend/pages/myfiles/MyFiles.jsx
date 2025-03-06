@@ -121,7 +121,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   });
 
   return (
-    <div className="content">
+    <div className="my-files-content">
       <div className="file-section">
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <main className="myFilesPage">
