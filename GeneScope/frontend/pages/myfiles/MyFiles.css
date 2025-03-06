@@ -51,6 +51,18 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
+  .delete-button{
+    background: linear-gradient(135deg, #5c6bc0, #7a8dc9);    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 5px;
+    transition: all 0.3sease-in-out;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+  }
 
   h3 {
     color: #6b77a1;
@@ -120,10 +132,15 @@
   
   .file-item {
     text-align: center;
+    align-items: center;
     font-size: 14px;
     color: #6b77a1;
     cursor: pointer;
     transition: background-color 0.2s;
+  }
+
+  .file-icon span{
+    margin-bottom: 5px;
   }
   
   .file-item.selected {
@@ -132,8 +149,6 @@
   }
   
   .file-icon {
-    width: 60px;
-    height: 80px;
     background-color: #d7e5ff;
     border-radius: 10px;
     display: flex;
