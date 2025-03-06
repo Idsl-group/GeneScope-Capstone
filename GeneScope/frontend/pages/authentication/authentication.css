@@ -5,8 +5,7 @@
   align-items: center;
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
-  background-color: #f2f6ff; /* Optional: Background color */
-}
+  background-image: url(/frontend/assets/Background.jpg);}
 
 .amplify-authenticator {
   width: 100%; /* Ensure responsive width */

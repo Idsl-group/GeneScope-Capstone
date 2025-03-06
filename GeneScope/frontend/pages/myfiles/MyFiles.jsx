@@ -102,7 +102,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
         {/* File List */}
         <div className="file-grid-container">
-          <div className="file-grid">
+          <div className="file-grid glass">
             <h2>
               {view === "all"
                 ? "All Files"
