@@ -38,6 +38,11 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
         <span></span>
       </div>
 
+      <div
+        className={`nav-overlay ${menuOpen ? "active" : ""}`}
+        onClick={toggleMenu}
+      ></div>
+
       {/* Nav links - slide-out drawer on mobile */}
       <div className={`nav-links ${menuOpen ? "active" : ""}`}>
         {/* Home button */}

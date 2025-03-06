@@ -102,12 +102,45 @@
     border-radius: 3px;
 }
 
+.nav-overlay {
+    display: none;                 /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;                  /* Cover the entire viewport */
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);/* Semi-transparent dark overlay */
+    z-index: 9998;                 /* Behind the nav drawer (9999) */
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+  
+.nav-overlay.active {
+    display: block;      /* Reveal it when active */
+    opacity: 1;
+}
+
 /* Responsive: show hamburger, and switch nav to a side-drawer approach */
 @media (max-width: 850px) {
     /* Show the hamburger icon; Hide the nav-links in a side drawer */
     .hamburger {
       display: flex; /* now visible on small screens */
     }
+
+    /* .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 240px;
+        height: 100vh;
+        background-color: white;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        flex-direction: column; 
+        padding: 80px 20px;      
+        transform: translateX(-120%); 
+        transition: transform 0.3s ease;
+        z-index: 9999;  
+      } */
   
     .nav-links {
       position: fixed;
@@ -115,18 +148,23 @@
       left: 0;
       width: 240px;
       height: 100vh;
-      background-color: white;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+      background-color: #ffffff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.15);
       flex-direction: column; /* stack buttons vertically */
       padding: 80px 20px;      /* push them down so hamburger is above */
       transform: translateX(-120%); 
       transition: transform 0.3s ease;
       z-index: 9999;  
+      border-bottom-right-radius: 12px;
     }
   
     /* Slide the drawer into view when .active is toggled */
     .nav-links.active {
         transform: translateX(0);
+    }
+
+    .floating-navbar .nav-button:not(:last-child)::after {
+        display: none;
     }
   
     /* The main navbar now only has the logo + hamburger in a row */
@@ -141,6 +179,13 @@
       margin: 15px 0;
       width: 100%;
     }
+
+    .nav-links .nav-button {
+        text-align: left;       /* Left-align text in the drawer */
+        padding: 15px 20px;     /* Increase vertical padding a bit */
+        margin: 8px 0;          /* Space between each button */
+        border-radius: 5px;     /* So the hover background looks nice */
+      }
 }
 
 
