@@ -1,5 +1,5 @@
 /* Main Content Styles */
-.content {
+.file-upload-content {
     flex: 1;
     padding: 20px;
     display: flex;
@@ -9,6 +9,9 @@
     /* background-color: #f7faff; */
     overflow: auto;
     overflow-x: hidden;
+
+    background-image: url("../../assets/Background.jpg");
+    background-size: cover; 
   }
 
 /* Page Layout */

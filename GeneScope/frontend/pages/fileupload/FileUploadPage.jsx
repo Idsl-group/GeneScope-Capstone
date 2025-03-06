@@ -34,7 +34,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
   }
 
   return (
-    <div className="content">
+    <div className="file-upload-content">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="fileUploadPage">
         <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
