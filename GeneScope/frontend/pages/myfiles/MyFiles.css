@@ -1,4 +1,9 @@
 /* MyFiles.css */
+.my-files-content{
+  background-image: url("../../assets/Background.jpg");
+  background-size: cover;
+}
+
 .file-section {
   flex: 1;
   padding: 20px;
