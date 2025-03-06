@@ -33,7 +33,6 @@
     width: 90%;
     max-width: 800px;
     padding: 20px;
-    background-color: #3a4b7a;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -41,7 +40,7 @@
 
 h2 {
     margin-bottom: 20px;
-    color: #9e9dff;
+    color: #3a4b7a;
 }
 
 .amplify-fileuploader {

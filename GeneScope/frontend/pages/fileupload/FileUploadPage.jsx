@@ -39,7 +39,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
       <main className="fileUploadPage">
         <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
         <h2>Upload DNA/RNA Files</h2>
-        <div className="file-uploader-container">
+        <div className="file-uploader-container glass">
           <FileUploader
             acceptedFileTypes={["*/*"]}
             accessLevel="public"
