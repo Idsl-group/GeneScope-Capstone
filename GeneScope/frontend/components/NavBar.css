@@ -83,6 +83,7 @@
     z-index: 1000;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 60px;
 }
 
 .nav-logo {
@@ -184,7 +185,6 @@
   
     /* Slide the drawer into view when .active is toggled */
     .nav-links.active {
-        /* display: flex; */
         transform: translateX(0);
     }
   

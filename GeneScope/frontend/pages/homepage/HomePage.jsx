@@ -163,7 +163,7 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
         <section className="about-container">
           {/* Left Side - Logo */}
           <div className="logo-container">
-            <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
+            <img src={GeneScopeLogo} alt="Genescope Logo" className="homepage-logo-image" />
           </div>
 
           {/* Right Side - About Us Content */}

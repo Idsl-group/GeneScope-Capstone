@@ -17,6 +17,8 @@ html, body, .App {
   min-height: 100vh; 
   width: 100%;
   overflow: auto; 
+  background-image: url("../../assets/Background.jpg");
+  background-size: cover; 
 }
 
 /* .sidebar {
@@ -53,14 +55,10 @@ html, body, .App {
   align-items: center;
   justify-content: center; 
   margin-left: 0px; 
-  background-color: #f7faff; 
+  /* background-color: #f7faff;  */
   height: 100vh; 
   overflow: auto;
-  background-image: url("../../assets/Background.jpg");
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center; 
-  background-attachment: fixed; 
+  margin-top: 60px;
 }
 
 .header {
@@ -85,7 +83,7 @@ html, body, .App {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   padding: 20px;
   animation: fadeIn 1s ease-in-out;
 }
@@ -110,7 +108,7 @@ html, body, .App {
   }
 }
 
-.logo-image {
+.homepage-logo-image {
   width: 400px;
   height: auto;
 
@@ -148,6 +146,7 @@ html, body, .App {
 .glass{
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
   backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, .1);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.18);
