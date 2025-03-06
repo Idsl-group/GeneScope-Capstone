@@ -7,7 +7,7 @@
     align-items: center;
     margin-left: 0px; /* Add this line to create space for the navbar */
     /* background-color: #f7faff; */
-    overflow: auto;
+    overflow: hidden;
     overflow-x: hidden;
   }
 

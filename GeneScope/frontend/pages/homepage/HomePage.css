@@ -57,7 +57,7 @@ html, body, .App {
   margin-left: 0px; 
   /* background-color: #f7faff;  */
   height: 100vh; 
-  overflow: auto;
+  overflow: hidden;
   margin-top: 60px;
 }
 
