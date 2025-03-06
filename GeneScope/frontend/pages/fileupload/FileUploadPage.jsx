@@ -43,7 +43,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
           <FileUploader
             acceptedFileTypes={["*/*"]}
             accessLevel="public"
-            path={`${userEmail}/`}
+            path={`${userEmail}/my_files/`}
             maxFileCount={5}
             isResumable
             onSuccess={(result) => {
