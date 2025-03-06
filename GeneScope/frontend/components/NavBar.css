@@ -34,10 +34,6 @@
     flex-wrap: nowrap;
   }
   
-  /* The .active class is toggled by React for mobile. We’ll override it later. */
-.nav-links.active {
-/* Overridden in mobile styles */
-}
 
 .nav-button {
     white-space: nowrap;
