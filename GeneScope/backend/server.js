@@ -13,8 +13,6 @@ app.use(express.json()); // Allow JSON requests
 
 // MongoDB Connection (Ensure 'files' is used instead of 'test')
 mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   dbName: "files", // This changes the database name from 'test' to 'files'
 });
 
@@ -45,16 +43,6 @@ app.post("/api/jobs", async (req, res) => {
     res.status(201).json({ message: "Job added successfully", job: newJob });
   } catch (error) {
     res.status(500).json({ error: "Failed to add job" });
-  }
-});
-
-// Get Jobs By Email Satus = "In Progress"
-app.get("/api/jobs/:email", async (req, res) => {
-  try {
-    const jobs = await Job.find({ email: req.params.email, status: "In Progress" });
-    res.json(jobs);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch jobs" });
   }
 });
 
