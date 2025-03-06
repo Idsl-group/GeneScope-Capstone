@@ -19,7 +19,6 @@
     display: flex;
     height: 100vh;
     width: calc(100vw - 240px);
-    background-color: #f7faff;
      /* Adjust this value based on the width of your navbar */
 }
 
