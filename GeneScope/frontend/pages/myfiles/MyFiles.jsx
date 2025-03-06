@@ -32,7 +32,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     const fetchFiles = async () => {
       try {
         const result = await list({
-          path: `public/${userEmail}/`,
+          path: `public/${userEmail}/my_files/`,
           options: { listAll: true },
         });
 
@@ -53,7 +53,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     try {
-      const fileKey = `public/${userEmail}/${selectedFile}`;
+      const fileKey = `public/${userEmail}/my_files/${selectedFile}`;
       const { url } = await getUrl({ path: fileKey });
       console.log(url);
     } catch (error) {
@@ -64,7 +64,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   // Delete a file from S3
   const handleDelete = async (fileName) => {
     try {
-      await remove({ path: `public/${userEmail}/${fileName}` });
+      await remove({ path: `public/${userEmail}/my_files/${fileName}` });
       setFileNames((prevFileNames) =>
         prevFileNames.filter((name) => name !== fileName)
       );
