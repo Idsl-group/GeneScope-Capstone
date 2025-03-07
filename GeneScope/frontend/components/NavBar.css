@@ -93,6 +93,20 @@
     cursor: pointer;
     margin-left: 20px; /* spacing from brand */
 }
+
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 7px);
+    background: #3a4b7a; /* stays consistent with your color scheme */
+}
+  
+.hamburger.open span:nth-child(2) {
+    opacity: 0; /* middle bar fades out */
+}
+  
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+    background: #3a4b7a;
+}
   
 .hamburger span {
     display: block;
@@ -100,16 +114,17 @@
     width: 100%;
     background: #3a4b7a; 
     border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
 .nav-overlay {
     display: none;                 /* Hidden by default */
     position: fixed;
-    top: 0;
+    top: -30%;
     left: 0;
     width: 100vw;                  /* Cover the entire viewport */
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4);/* Semi-transparent dark overlay */
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
     z-index: 9998;                 /* Behind the nav drawer (9999) */
     transition: opacity 0.3s ease;
     opacity: 0;
@@ -126,41 +141,28 @@
     .hamburger {
       display: flex; /* now visible on small screens */
     }
-
-    /* .nav-links {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 240px;
-        height: 100vh;
-        background-color: white;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-        flex-direction: column; 
-        padding: 80px 20px;      
-        transform: translateX(-120%); 
-        transition: transform 0.3s ease;
-        z-index: 9999;  
-      } */
   
     .nav-links {
       position: fixed;
-      top: 0;
+      top: -30%;
       left: 0;
       width: 240px;
       height: 100vh;
-      background-color: #ffffff;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.15);
-      flex-direction: column; /* stack buttons vertically */
-      padding: 80px 20px;      /* push them down so hamburger is above */
+      flex-direction: column;
+      padding: 80px 20px;      
       transform: translateX(-120%); 
       transition: transform 0.3s ease;
       z-index: 9999;  
       border-bottom-right-radius: 12px;
+      background: linear-gradient(135deg, #fff 0%, #f7faff 100%);
+      border-top-right-radius: 30px;  /* bigger round corners */
+      border-bottom-right-radius: 30px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     }
   
     /* Slide the drawer into view when .active is toggled */
     .nav-links.active {
-        transform: translateX(0);
+        transform: translateX(-20%);
     }
 
     .floating-navbar .nav-button:not(:last-child)::after {
@@ -185,7 +187,7 @@
         padding: 15px 20px;     /* Increase vertical padding a bit */
         margin: 8px 0;          /* Space between each button */
         border-radius: 5px;     /* So the hover background looks nice */
-      }
+    }
 }
 
 

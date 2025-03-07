@@ -32,7 +32,10 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       </span>
 
       {/* Hamburger icon (only visible on smaller screens) */}
-      <div className="hamburger" onClick={toggleMenu}>
+      <div
+        className={`hamburger ${menuOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      >
         <span></span>
         <span></span>
         <span></span>
