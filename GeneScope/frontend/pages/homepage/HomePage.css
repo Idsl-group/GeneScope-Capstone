@@ -49,6 +49,8 @@ html, body, .App {
   overflow: hidden; */
   
   margin-top: 60px;
+  opacity: 0;
+  animation: fadeIn 0.6s forwards ease-in-out;
 }
 
 .header {
@@ -192,9 +194,9 @@ html, body, .App {
 }
 
 .about-content h2 {
-  font-size: 28px;
+  font-size: 36px;
   color: #3a4b7a;
-  margin-bottom: 15px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 1101px) and (max-width: 1400px) {
@@ -236,7 +238,7 @@ html, body, .App {
   }
 
   .homepage-logo-image {
-    width: 250px; /* Reduce logo size */
+    width: 300px; /* Reduce logo size */
   }
 
   .about-content {

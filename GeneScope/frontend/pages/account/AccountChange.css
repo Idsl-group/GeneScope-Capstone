@@ -15,6 +15,11 @@
     background-size: cover; 
   }
   
+  .update-password-title {
+    font-size: 36px;
+    color: #3a4b7a;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  }
 
   .logo-image {
     width: 300px;
