@@ -46,6 +46,8 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
             path={`${userEmail}/my_files/`}
             maxFileCount={5}
             isResumable
+            variation="drop"
+            hasDragOverlay
             onSuccess={(result) => {
               console.log("File uploaded successfully:", result);
               alert("File uploaded successfully!");
