@@ -10,6 +10,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [fileNames, setFileNames] = useState([]);
   const [view, setView] = useState("all");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [activeButton, setActiveButton] = useState("all");
 
   // Fetch user email when component loads
   useEffect(() => {
@@ -125,39 +126,58 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       <div className="file-section">
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <main className="myFilesPage">
+          <div className="logo-container">
+            
           <img
             src={GeneScopeLogo}
             alt="Genescope Logo"
             className="logo-image"
           />
+          </div>
           <h2 className="page-title">My Files</h2>
 
           {/* View Buttons */}
-          <div className="view-buttons">
-            <button onClick={() => setView("all")}>All Files</button>
-            <button onClick={() => setView("waiting")}>
+
+          {/* View Buttons */}
+          <div className="view-buttons glass">
+            <button
+              className={`file-button ${activeButton === "all" ? "active" : ""}`}
+              onClick={() => {
+                setView("all");
+                setActiveButton("all");
+              }}
+            >
+              All Files
+            </button>
+            <button
+              className={`file-button ${activeButton === "waiting" ? "active" : ""}`}
+              onClick={() => {
+                setView("waiting");
+                setActiveButton("waiting");
+              }}
+            >
               Files Waiting to be Processed
             </button>
-            <button onClick={() => setView("processed")}>
+            <button
+              className={`file-button ${activeButton === "processed" ? "active" : ""}`}
+              onClick={() => {
+                setView("processed");
+                setActiveButton("processed");
+              }}
+            >
               Processed Files
             </button>
           </div>
 
           {/* File List */}
           <div className="file-grid-container">
-            <div className="file-grid">
-              <h2>
-                {view === "all"
-                  ? "All Files"
-                  : view === "waiting"
-                  ? "Files Waiting to be Processed"
-                  : "Processed Files"}
-              </h2>
+            <div className="file-grid glass">
+              
               {filteredFiles.length > 0 ? (
                 <>
                   {filteredFiles.map((file, index) => (
                     <div
-                      className={`file-item ${
+                      className={`file-item glass ${
                         selectedFile === file ? "selected" : ""
                       }`}
                       key={index}
@@ -172,25 +192,29 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                           handleDelete(file);
                         }}
                       >
-                        Remove
+                        X
                       </button>
                     </div>
                   ))}
-                  <div className="action-buttons">
+                  
+                </>
+              ) : (
+                <div className="no-files">
+                <h3>No files available.</h3>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="action-buttons">
                     <button
-                      className="start-job-button"
+                      className="start-job-button glass"
                       onClick={handleStartJob}
                       disabled={!selectedFile}
                     >
                       Start Job
                     </button>
                   </div>
-                </>
-              ) : (
-                <h3>No files available.</h3>
-              )}
-            </div>
-          </div>
+                
         </main>
       </div>
     </div>

@@ -31,39 +31,50 @@
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 50px;
   }
   
-  .view-buttons button {
-    background: linear-gradient(135deg, #5c6bc0, #7a8dc9);    color: white;
+  .file-button {
+    background: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
     border: none;
     padding: 10px 20px;
     margin: 0 10px;
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3sease-in-out;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     border-radius: 25px;
 
   }
-  
+ 
   .view-buttons button:hover {
-    background: linear-gradient(135deg, #7a8dc9, #5c6bc0);
+    background: linear-gradient(135deg, #1abc9c, #0a3d62);
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+  }
+  .file-button.active {
+    background: linear-gradient(135deg, #3a4b7a, #5c6bc0); /* Different color for active button */
+    color: white;
+    
   }
 
   .delete-button{
     background: linear-gradient(135deg, #5c6bc0, #7a8dc9);    color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     margin: 0 10px;
     cursor: pointer;
     align-items: center;
-    border-radius: 5px;
     transition: all 0.3sease-in-out;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 25px;
+    border-radius: 10px;
   }
 
   h3 {
@@ -79,66 +90,31 @@
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   }
 
-  .tabs-wrapper {
-    position: absolute; /* Change to absolute positioning */
-    top: 30%; /* Align to the top */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-30%); /* Adjust for centering */
+  .file-grid-container {
     display: flex;
-    width: 30%; /* Adjust the width as needed */
-    white-space: nowrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .tabs-background {
-    position: absolute;
-    width: 90%;
-    height: 70px;
-    background-color: #d7e5ff;
-    border-radius: 50px;
-    z-index: 0;
-  }
-  
-  .tabs {
-    display: flex;
     justify-content: center;
-    z-index: 1; /* Ensures the buttons appear above the background */
+    width: 100%;
+    padding: 20px;
   }
-  
-  .tab-button {
-    background-color: #6b77a1;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin: 0 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    color: #6b77a1;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .tab-button.active {
-    background-color: #a6c8ff;
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
   .file-grid {
     display: grid;
     flex-direction: row;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     justify-items: center;
     justify-content: center;
     align-items: center;
-    background-color: #d7e5ff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
     border-radius: 10px;
+    border-spacing: 10px;
+    padding: 30px;
   }
   
   .file-item {
+    width: 300px;
     text-align: center;
     align-items: center;
     font-size: 14px;
@@ -153,11 +129,10 @@
   
   .file-item.selected {
     background-color: #e6f3ff;
-    border: 1px solid #1890ff;
+    
   }
   
   .file-icon {
-    background-color: #d7e5ff;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -165,14 +140,15 @@
     margin-bottom: 5px;
     font-size: 28px;
     color: #6b77a1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
     transition: background-color 0.3s, transform 0.3s;
   }
   
-  .file-icon:hover {
+  .file-item:hover {
     background-color: #a6c8ff;
     transform: scale(1.1);
     color: #ffffff;
+    transition: all 0.3s ease-in-out;
   }
   
   .logout {
@@ -201,7 +177,7 @@
   
   .start-job-button {
     padding: 8px 16px;
-    background-color: #1890ff;
+    
     color: white;
     border: none;
     border-radius: 4px;
@@ -213,8 +189,67 @@
     background-color: #ccc;
     cursor: not-allowed;
   }
-  
+  .start-job-button:not(:disabled) {
+    background: linear-gradient(135deg, #5c6bc0, #7a8dc9); /* Purple to Blue */
+    transition: all 0.3s ease-in-out;
+  }
   .start-job-button:hover:not(:disabled) {
-    background-color: #40a9ff;
+    background: linear-gradient(135deg, #1abc9c, #0a3d62); /* Teal to Deep Blue */
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
   }
   
+
+  @media (max-width: 1100px) {
+    .root {
+      margin-top: 80px; /* Ensure content starts below navbar */
+      padding: 10px; /* Reduce padding */
+    }
+  
+    .myFilesPage {
+      flex-direction: column;
+    }
+    .page-title {
+      font-size: 24px; /* Reduce font size */
+    }
+  
+    .file-grid-container {
+      flex-direction: column; /* Stack logo and text vertically */
+      align-items: center; /* Center align */
+      width: 90%;
+    }
+  
+    .logo-container {
+      order: -1; /* Move logo to the top */
+    }
+  
+    .logo-image {
+      width: 300px; /* Reduce logo size */
+    }
+  
+    .view-buttons button{
+      max-width: 100%; /* Allow full width */
+      padding: 10px;
+    }
+
+    .file-grid{
+      max-width: 400%; /* Allow full width */
+      padding: 10px;
+      flex-direction: column;
+      grid-template-columns: repeat(2, 1fr);
+
+    }
+    .file-item {
+      width: 100%; /* Make the box take full width */
+      padding: 10px;
+    }
+    .file-button {
+      font-size: 14px; /* Reduce text size for readability */
+      padding: 10px;
+      width: 100%; /* Make the box take full width */
+    }
+  
+    .start-job-button {
+      width: 100%; /* Make the button full width */
+    }
+  }
