@@ -19,7 +19,9 @@
     justify-content: center; /* Center the content */
     display: flex;
     min-height: 100vh;
-    width: calc(100vw - 240px);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
     opacity: 0;
@@ -70,3 +72,33 @@ h2 {
     width: 100%;
     margin-bottom: 20px;
 }
+
+@media (max-width: 850px) {
+    .fileUploadPage {
+      padding: 10px;
+      /* Maybe reduce margin so the content fits better */
+      /* margin: 0; */
+    }
+  
+    /* Reduce that large 36px heading on narrower screens */
+    .file-upload-content h2 {
+      font-size: 28px;
+    }
+  
+    /* Maybe narrower container or reduced padding if you like */
+    .file-uploader-container {
+      padding: 20px;
+      margin-top: 10px;
+    }
+  }
+  
+  /* Even smaller phones (max-width: 480px) */
+  @media (max-width: 480px) {
+    .file-upload-content h2 {
+      font-size: 24px;
+    }
+  
+    .file-uploader-container {
+      padding: 15px;
+    }
+  }
