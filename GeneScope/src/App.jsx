@@ -5,7 +5,7 @@ import HomePage from "../frontend/pages/homepage/HomePage";
 import Authentication from "../frontend/pages/authentication/authentication";
 import FileUploadPage from "../frontend/pages/fileupload/FileUploadPage";
 import MyFiles from "../frontend/pages/myfiles/MyFiles";
-import AccountChange from "../frontend/pages/account/AccountChange";
+//import AccountChange from "../frontend/pages/account/AccountChange";
 import "./App.css";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/fileupload" element={isLoggedIn ? <FileUploadPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} />
         <Route path="/myfiles" element={isLoggedIn ? <MyFiles isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} />
-        <Route path="/account" element={isLoggedIn ? <AccountChange isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} />
+        {/* <Route path="/account" element={isLoggedIn ? <AccountChange isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/authentication" />} /> */}
       </Routes>
     </Router>
   );

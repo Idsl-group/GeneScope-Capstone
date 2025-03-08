@@ -65,16 +65,17 @@
     
   }
 
-  .delete-button{
-    background: linear-gradient(135deg, #5c6bc0, #7a8dc9);    color: white;
+  .delete-button {
+    background: linear-gradient(135deg, #5c6bc0, #7a8dc9);
+    color: white;
     border: none;
     padding: 5px 10px;
-    margin: 0 10px;
     cursor: pointer;
-    align-items: center;
-    transition: all 0.3sease-in-out;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    position: absolute; /* Position the delete button */
+    top: 5px; /* Adjust the position as needed */
+    right: 5px; /* Adjust the position as needed */
   }
 
   h3 {
@@ -111,16 +112,28 @@
     border-radius: 10px;
     border-spacing: 10px;
     padding: 30px;
+    text-align: right;
   }
   
   .file-item {
-    width: 300px;
-    text-align: center;
+    display: flex;
+    width: 150px;
+    height: 150px;
+    text-align: right;
     align-items: center;
     font-size: 14px;
     color: #6b77a1;
     cursor: pointer;
     transition: background-color 0.2s;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    position: relative;
+  }
+  .file-name{
+    text-align: center;
+    display: block;
   }
 
   .file-icon span{
@@ -128,19 +141,18 @@
   }
   
   .file-item.selected {
-    background-color: #e6f3ff;
-    
+    background: linear-gradient(135deg, #1abc9c, #0a3d62); /* Teal to Deep Blue */
+    color: white;    
   }
   
   .file-icon {
-    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5px;
+    margin-top: 40px;
     font-size: 28px;
     color: #6b77a1;
-    
+    background-image: url("../../assets/google-docs.png");
     transition: background-color 0.3s, transform 0.3s;
   }
   
@@ -149,6 +161,16 @@
     transform: scale(1.1);
     color: #ffffff;
     transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+  }
+  .file-button.active:hover{
+    background: linear-gradient(135deg, #3a4b7a, #5c6bc0); /* Different color for active button */
+    color: white;
+    
   }
   
   .logout {
@@ -198,7 +220,11 @@
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
   }
-  
+  .logo-image {
+    width: 300px;
+    height: 300px;
+    margin: 0px;
+  }
 
   @media (max-width: 1100px) {
     .root {

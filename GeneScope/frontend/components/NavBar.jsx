@@ -78,14 +78,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
               My Files
             </button>
 
-            <button
-              className={`nav-button ${
-                location.pathname === "/account" ? "active-tab" : ""
-              }`}
-              onClick={() => navigate("/account")}
-            >
-              Account
-            </button>
+            
           </>
         )}
 

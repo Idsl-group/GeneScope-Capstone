@@ -4,6 +4,7 @@ import { getCurrentUser } from "aws-amplify/auth";
 import "./MyFiles.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
+import fileLogo from "../../assets/google-docs.png";
 
 const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
@@ -121,6 +122,10 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return false;
   });
 
+  const getFileNameWithoutExtension = (fileName) => {
+    return fileName.replace(/\.[^/.]+$/, "");
+  };
+
   return (
     <div className="my-files-content">
       <div className="file-section">
@@ -156,7 +161,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                 setActiveButton("waiting");
               }}
             >
-              Files Waiting to be Processed
+              Processing Files
             </button>
             <button
               className={`file-button ${activeButton === "processed" ? "active" : ""}`}
@@ -177,14 +182,12 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                 <>
                   {filteredFiles.map((file, index) => (
                     <div
-                      className={`file-item glass ${
+                      className={`file-item  ${
                         selectedFile === file ? "selected" : ""
                       }`}
                       key={index}
                       onClick={() => setSelectedFile(file)}
                     >
-                      <div className="file-icon">📄</div>
-                      <span>{file}</span>
                       <button
                         className="delete-button"
                         onClick={(e) => {
@@ -194,6 +197,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       >
                         X
                       </button>
+                      <img className="file-icon" src={fileLogo}></img>
+                      
+                      <span className="file-name">{getFileNameWithoutExtension(file)}</span>
                     </div>
                   ))}
                   
