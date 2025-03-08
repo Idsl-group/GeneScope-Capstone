@@ -37,7 +37,9 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
     <div className="file-upload-content">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="fileUploadPage">
-        <img src={GeneScopeLogo} alt="Genescope Logo" className="logo-image" />
+        <div className="file-upload-logo-container">
+          <img src={GeneScopeLogo} alt="Genescope Logo" className="file-upload-logo-image" />
+        </div>
         <h2>Upload DNA/RNA Files</h2>
         <div className="file-uploader-container glass">
           <FileUploader
@@ -56,6 +58,16 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
               console.error("Error uploading file:", error);
               alert("File upload failed.");
             }}
+            // onSelect={(event) => {
+            //   // Wait a moment so Amplify adds the items.
+            //   setTimeout(() => {
+            //     const nameElems = document.querySelectorAll('.amplify-fileuploader__file__main p'); 
+            //     nameElems.forEach((el) => {
+            //       // Remove extension with a regex: everything after the last dot
+            //       el.textContent = el.textContent.replace(/\.[^/.]+$/, "");
+            //     });
+            //   }, 0);
+            // }}
           />
         </div>
       </main>
