@@ -42,3 +42,9 @@
 .read-the-docs {
   color: #888;
 }
+
+svg {
+  border: 1px solid #ccc;
+  background: white;
+  margin: 20px 0;
+}
