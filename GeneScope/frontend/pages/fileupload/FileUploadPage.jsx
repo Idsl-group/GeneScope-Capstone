@@ -58,16 +58,6 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
               console.error("Error uploading file:", error);
               alert("File upload failed.");
             }}
-            // onSelect={(event) => {
-            //   // Wait a moment so Amplify adds the items.
-            //   setTimeout(() => {
-            //     const nameElems = document.querySelectorAll('.amplify-fileuploader__file__main p'); 
-            //     nameElems.forEach((el) => {
-            //       // Remove extension with a regex: everything after the last dot
-            //       el.textContent = el.textContent.replace(/\.[^/.]+$/, "");
-            //     });
-            //   }, 0);
-            // }}
           />
         </div>
       </main>
