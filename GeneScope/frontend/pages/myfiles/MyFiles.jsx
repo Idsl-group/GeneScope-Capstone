@@ -13,6 +13,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [view, setView] = useState("all");
   const [selectedFile, setSelectedFile] = useState(null);
   const [activeButton, setActiveButton] = useState("all");
+  const [processedFiles, setProcessedFiles] = useState([]);
+
 
   // Fetch user email when component loads
   useEffect(() => {
@@ -31,7 +33,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   // Fetch file names from S3
   useEffect(() => {
     if (!userEmail) return;
-
+  
     const fetchFiles = async () => {
       try {
         const myFilesResult = await list({
@@ -43,16 +45,16 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           path: `public/${userEmail}/processed_files/`,
           options: { listAll: true },
         });
-
+  
         setFileNames(myFilesResult.items.map((item) => item.path.split("/").pop()));
         setProcessedFiles(processedFilesResult.items.map((item) => item.path.split("/").pop()));
       } catch (error) {
         console.error("Error fetching files:", error);
       }
     };
-
+  
     fetchFiles();
-  }, [userEmail]);
+  }, [userEmail]);  
 
   // Handle Start Job: Get file URL and send it to MongoDB server
   const handleStartJob = async () => {
@@ -63,7 +65,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
     try {
       const fileKey = `public/${userEmail}/my_files/${selectedFile}`;
-      const returnLocationUrl = `public/${userEmail}/completed_files/`;
+      const returnLocationUrl = `https://tepnbg3j40.execute-api.us-east-1.amazonaws.com/dev/public/${userEmail}/processed_files/${selectedFile}`;
 
       // Fetch file URL from AWS S3
       const { url } = await getUrl({ path: fileKey });
@@ -108,7 +110,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  // Download a file from S3
   const handleDownload = async (fileName) => {
     try {
       const fileKey = `public/${userEmail}/processed_files/${fileName}`;
@@ -117,7 +118,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     } catch (error) {
       alert("An error occurred while downloading the file.");
     }
-  };
+  };  
 
 const handleDeleteProcessed = async (fileName) => {
     try {
@@ -158,8 +159,6 @@ const handleDeleteProcessed = async (fileName) => {
           />
           </div>
           <h2 className="page-title">My Files</h2>
-
-          {/* View Buttons */}
 
           {/* View Buttons */}
           <div className="view-buttons glass">
@@ -246,6 +245,7 @@ const handleDeleteProcessed = async (fileName) => {
   );
 };
 
+<<<<<<< Updated upstream
 export default MyFiles;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -527,3 +527,6 @@ export default MyFiles;
 // };
 
 // export default MyFiles;
+=======
+export default MyFiles;
+>>>>>>> Stashed changes
