@@ -9,6 +9,7 @@ import fileLogo from "../../assets/google-docs.png";
 const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
   const [fileNames, setFileNames] = useState([]);
+  const [processedFiles, setProcessedFiles] = useState([]);
   const [view, setView] = useState("all");
   const [selectedFile, setSelectedFile] = useState(null);
   const [activeButton, setActiveButton] = useState("all");
@@ -37,6 +38,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           path: `public/${userEmail}/my_files/`,
           options: { listAll: true },
         });
+
         const processedFilesResult = await list({
           path: `public/${userEmail}/processed_files/`,
           options: { listAll: true },
@@ -78,8 +80,14 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           status: "In Progress",
         }),
       });
-
+      
       if (!response.ok) throw new Error("Failed to add job to queue");
+
+      setFileNames((prevFileNames) =>
+        prevFileNames.map((name) =>
+          name === selectedFile ? `${name}-waiting` : name
+        )
+      );
 
       alert("Job added to queue successfully!");
     } catch (error) {
@@ -111,14 +119,24 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
+const handleDeleteProcessed = async (fileName) => {
+    try {
+      await remove({ path: `public/${userEmail}/processed_files/${fileName}` });
+      setProcessedFiles((prevFiles) =>
+        prevFiles.filter((name) => name !== fileName)
+      );
+    } catch (error) {
+      alert("An error occurred while deleting the file.");
+    }
+  };
+
   if (!isLoggedIn) {
     return <h2>Please log in to view your files.</h2>;
   }
 
-  const filteredFiles = fileNames.filter((file) => {
+  const filteredFiles = view === "processed" ? processedFiles : fileNames.filter((file) => {
     if (view === "all") return true;
     if (view === "waiting") return file.includes("waiting");
-    if (view === "processed") return file.includes("processed");
     return false;
   });
 
@@ -193,6 +211,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(file);
+                          handleDeleteProcessed(file);
                         }}
                       >
                         X
