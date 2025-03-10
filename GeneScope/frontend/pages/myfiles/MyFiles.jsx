@@ -13,7 +13,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [view, setView] = useState("all");
   const [selectedFile, setSelectedFile] = useState(null);
   const [activeButton, setActiveButton] = useState("all");
-  const [processedFiles, setProcessedFiles] = useState([]);
 
 
   // Fetch user email when component loads
@@ -245,7 +244,6 @@ const handleDeleteProcessed = async (fileName) => {
   );
 };
 
-<<<<<<< Updated upstream
 export default MyFiles;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -527,6 +525,3 @@ export default MyFiles;
 // };
 
 // export default MyFiles;
-=======
-export default MyFiles;
->>>>>>> Stashed changes
