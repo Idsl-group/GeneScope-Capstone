@@ -11,6 +11,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
   const [fileNames, setFileNames] = useState([]);
   const [processedFiles, setProcessedFiles] = useState([]);
+  const [inProgressFiles, setInProgressFiles] = useState([]);
   const [view, setView] = useState("all");
   const [selectedFile, setSelectedFile] = useState(null);
   const [activeButton, setActiveButton] = useState("all");
@@ -29,6 +30,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         setIsLoggedIn(false);
       }
     };
+    fetchInProgressFiles();
     fetchUserEmail();
   }, [setIsLoggedIn]);
 
@@ -62,6 +64,27 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     fetchFiles();
   }, [userEmail]);
 
+  // Fetch "In Progress" files from MongoDB
+  useEffect(() => {
+    if (!userEmail) return;
+
+    const fetchInProgressFiles = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/jobs?email=${userEmail}&status=In Progress`
+        );
+        if (!response.ok) throw new Error("Failed to fetch in-progress files");
+
+        const jobs = await response.json();
+        setInProgressFiles(jobs.map((job) => job.fileName)); // Extract file names
+      } catch (error) {
+        console.error("Error fetching in-progress files:", error);
+      }
+    };
+
+    fetchInProgressFiles();
+  }, [userEmail]);
+
   // Handle Start Job: Get file URL and send it to MongoDB server
   const handleStartJob = async () => {
     if (!selectedFile) {
@@ -71,7 +94,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
     try {
       const fileKey = `public/${userEmail}/my_files/${selectedFile}`;
-      const returnLocationUrl = `public/${userEmail}/completed_files/`;
+      const returnLocationUrl = `https://tepnbg3j40.execute-api.us-east-1.amazonaws.com/dev/public/${userEmail}/processed_files/${selectedFile}`;
 
       // Fetch file URL from AWS S3
       const { url } = await getUrl({ path: fileKey });
@@ -97,9 +120,28 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         )
       );
 
+      // Refresh in-progress files after job submission
+      fetchInProgressFiles();
+
       alert("Job added to queue successfully!");
     } catch (error) {
       alert("An error occurred while starting the job.");
+    }
+  };
+
+  const fetchInProgressFiles = async () => {
+    if (!userEmail) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/jobs?email=${userEmail}&status=In Progress`
+      );
+      if (!response.ok) throw new Error("Failed to fetch in-progress files");
+
+      const jobs = await response.json();
+      setInProgressFiles(jobs.map((job) => job.fileName)); // Extract file names
+    } catch (error) {
+      console.error("Error fetching in-progress files:", error);
     }
   };
 
@@ -147,7 +189,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     try {
       const fileKey = `public/${userEmail}/processed_files/${file}`;
       const { url } = await getUrl({ path: fileKey });
-      
+
       // Fetch the file as text
       const response = await fetch(url);
       const fileText = await response.text();
@@ -162,11 +204,14 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       const structure = parseFloat(parts[2].trim());
 
       // Call your Python backend endpoint to run the GPT-2 code
-      const pythonResponse = await fetch("http://localhost:5000/generate-feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ popularity, stability, structure }),
-      });
+      const pythonResponse = await fetch(
+        "http://localhost:5000/generate-feedback",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ popularity, stability, structure }),
+        }
+      );
       if (!pythonResponse.ok) {
         throw new Error("Python endpoint error");
       }
@@ -187,15 +232,15 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return <h2>Please log in to view your files.</h2>;
   }
 
-  // Determine which files to show based on the selected view
-  const filteredFiles =
-    view === "processed"
-      ? processedFiles
-      : fileNames.filter((file) => {
-          if (view === "all") return true;
-          if (view === "waiting") return file.includes("waiting");
-          return false;
-        });
+  // Update the file list based on the selected view
+  let filteredFiles = [];
+  if (view === "processed") {
+    filteredFiles = processedFiles;
+  } else if (view === "waiting") {
+    filteredFiles = inProgressFiles; // Use MongoDB files for "Processing Files"
+  } else {
+    filteredFiles = fileNames; // Default to My Files
+  }
 
   const getFileNameWithoutExtension = (fileName) => {
     return fileName.replace(/\.[^/.]+$/, "");
@@ -215,10 +260,12 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
           <h2 className="page-title">My Files</h2>
 
-          {/* View Buttons */}
+          {/* View Selection Buttons */}
           <div className="view-buttons glass">
             <button
-              className={`file-button ${activeButton === "all" ? "active" : ""}`}
+              className={`file-button ${
+                activeButton === "all" ? "active" : ""
+              }`}
               onClick={() => {
                 setView("all");
                 setActiveButton("all");
@@ -227,7 +274,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               All Files
             </button>
             <button
-              className={`file-button ${activeButton === "waiting" ? "active" : ""}`}
+              className={`file-button ${
+                activeButton === "waiting" ? "active" : ""
+              }`}
               onClick={() => {
                 setView("waiting");
                 setActiveButton("waiting");
@@ -236,7 +285,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               Processing Files
             </button>
             <button
-              className={`file-button ${activeButton === "processed" ? "active" : ""}`}
+              className={`file-button ${
+                activeButton === "processed" ? "active" : ""
+              }`}
               onClick={() => {
                 setView("processed");
                 setActiveButton("processed");
@@ -253,7 +304,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                 <>
                   {filteredFiles.map((file, index) => (
                     <div
-                      className={`file-item ${selectedFile === file ? "selected" : ""}`}
+                      className={`file-item ${
+                        selectedFile === file ? "selected" : ""
+                      }`}
                       key={index}
                       // onClick={() => {
                       //   setSelectedFile(file);
@@ -273,7 +326,11 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       >
                         X
                       </button>
-                      <img className="file-icon" src={fileLogo} alt="file icon" />
+                      <img
+                        className="file-icon"
+                        src={fileLogo}
+                        alt="file icon"
+                      />
                       <span className="file-name">
                         {getFileNameWithoutExtension(file)}
                       </span>
@@ -312,10 +369,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       </div>
       {/* Render Popup when feedback is available */}
       {showPopup && (
-        <Popup
-          feedback={feedback}
-          onClose={() => setShowPopup(false)}
-        />
+        <Popup feedback={feedback} onClose={() => setShowPopup(false)} />
       )}
       {/* Render loading animation when isLoading is true */}
       {isLoading && (
