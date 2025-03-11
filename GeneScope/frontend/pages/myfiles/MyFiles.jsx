@@ -5,6 +5,7 @@ import "./MyFiles.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
 import fileLogo from "../../assets/google-docs.png";
+import Swal from "sweetalert2";
 
 const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
@@ -58,7 +59,12 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   // Handle Start Job: Get file URL and send it to MongoDB server
   const handleStartJob = async () => {
     if (!selectedFile) {
-      alert("Please select a file first");
+      //alert("Please select a file first");
+      Swal.fire({
+        title: "question",
+        text: `Please select a file first`,
+        icon: "success"
+      });
       return;
     }
 
@@ -90,9 +96,19 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         )
       );
 
-      alert("Job added to queue successfully!");
+      //alert("Job added to queue successfully!");
+      Swal.fire({
+        title: "Job Added",
+        text: `Job added to queue successfully!`,
+        icon: "success"
+      });
     } catch (error) {
-      alert("An error occurred while starting the job.");
+      //alert("An error occurred while starting the job.");
+      Swal.fire({
+        title: "Error",
+        text: `An error occurred while starting the job.`,
+        icon: "error"
+      });
     }
   };
 
@@ -103,9 +119,19 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       setFileNames((prevFileNames) =>
         prevFileNames.filter((name) => name !== fileName)
       );
-      alert(`File "${fileName}" has been deleted.`);
+      // alert(`File "${fileName}" has been deleted.`);
+      Swal.fire({
+        title: "File Deleted",
+        text: `File "${fileName}" has been deleted.`,
+        icon: "success"
+      });
     } catch (error) {
-      alert("An error occurred while deleting the file.");
+      //alert("An error occurred while deleting the file.");
+      Swal.fire({
+        title: "Error",
+        text: `An error occurred while deleting the file.`,
+        icon: "error"
+      });
     }
   };
 
@@ -115,7 +141,12 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       const { url } = await getUrl({ path: fileKey });
       window.open(url, "_blank");
     } catch (error) {
-      alert("An error occurred while downloading the file.");
+      //alert("An error occurred while downloading the file.");
+      Swal.fire({
+        title: "Error",
+        text: `An error occurred while downloading the file.`,
+        icon: "error"
+      });
     }
   };  
 
@@ -126,7 +157,12 @@ const handleDeleteProcessed = async (fileName) => {
         prevFiles.filter((name) => name !== fileName)
       );
     } catch (error) {
-      alert("An error occurred while deleting the file.");
+      //alert("An error occurred while deleting the file.");
+      Swal.fire({
+        title: "Error",
+        text: `An error occurred while deleting the file.`,
+        icon: "error"
+      });
     }
   };
 
