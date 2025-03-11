@@ -11,9 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Allow JSON requests
 
-// MongoDB Connection (Ensure 'files' is used instead of 'test')
 mongoose.connect(process.env.MONGO_URI, {
-  dbName: "files", // This changes the database name from 'test' to 'files'
+  dbName: "files",
 });
 
 const db = mongoose.connection;
@@ -43,6 +42,17 @@ app.post("/api/jobs", async (req, res) => {
     res.status(201).json({ message: "Job added successfully", job: newJob });
   } catch (error) {
     res.status(500).json({ error: "Failed to add job" });
+  }
+});
+
+// GET endpoint to retrieve jobs for a specific email and status
+app.get("/api/jobs", async (req, res) => {
+  const { email, status } = req.query;
+  try {
+    const jobs = await Job.find({ email, status });
+    res.json(jobs);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch jobs" });
   }
 });
 
