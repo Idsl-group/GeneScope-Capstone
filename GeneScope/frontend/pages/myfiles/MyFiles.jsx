@@ -5,7 +5,8 @@ import "./MyFiles.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
 import fileLogo from "../../assets/google-docs.png";
-import Popup from "../../pages/popup/Popup"; // Import your Popup component
+import Swal from "sweetalert2";
+import Popup from "../.."; // Import your Popup component
 
 const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
@@ -54,6 +55,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         setProcessedFiles(
           processedFilesResult.items.map((item) => item.path.split("/").pop())
         );
+  
+        setFileNames(myFilesResult.items.map((item) => item.path.split("/").pop()));
+        setProcessedFiles(processedFilesResult.items.map((item) => item.path.split("/").pop()));
       } catch (error) {
         console.error("Error fetching files:", error);
       }
@@ -116,19 +120,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  // Delete a file from processed_files
-  const handleDeleteProcessed = async (fileName) => {
-    try {
-      await remove({ path: `public/${userEmail}/processed_files/${fileName}` });
-      setProcessedFiles((prevFiles) =>
-        prevFiles.filter((name) => name !== fileName)
-      );
-    } catch (error) {
-      alert("An error occurred while deleting the file.");
-    }
-  };
-
-  // Download a processed file from S3
   const handleDownload = async (fileName) => {
     try {
       const fileKey = `public/${userEmail}/processed_files/${fileName}`;
@@ -143,7 +134,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   // grab the first row, parse the comma-separated scores, and call the Python backend.
   const handleProcessedFileSelection = async (file) => {
     setSelectedFile(file);
-    setIsLoading(true); // Show loading animation
     try {
       const fileKey = `public/${userEmail}/processed_files/${file}`;
       const { url } = await getUrl({ path: fileKey });
@@ -172,7 +162,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       }
       const result = await pythonResponse.json();
       // Instead of using alert, set the feedback and show the popup
-      console.log("Generated Feedback:\n", result.feedback);
       setFeedback(result.feedback);
       setShowPopup(true);
     } catch (error) {
@@ -255,13 +244,12 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                     <div
                       className={`file-item ${selectedFile === file ? "selected" : ""}`}
                       key={index}
-                      // onClick={() => {
-                      //   setSelectedFile(file);
-                      //   if (view === "processed") {
-                      //     handleProcessedFileSelection(file);
-                      //   }
-                      // }}
-                      onClick={() => setSelectedFile(file)}
+                      onClick={() => {
+                        setSelectedFile(file);
+                        if (view === "processed") {
+                          handleProcessedFileSelection(file);
+                        }
+                      }}
                     >
                       <button
                         className="delete-button"
@@ -292,7 +280,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           <div className="action-buttons">
             {view === "processed" ? (
               <button
-                className="start-job-button glass"
+                className="feedback-button glass"
                 onClick={() => handleProcessedFileSelection(selectedFile)}
                 disabled={!selectedFile}
               >
@@ -316,12 +304,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           feedback={feedback}
           onClose={() => setShowPopup(false)}
         />
-      )}
-      {/* Render loading animation when isLoading is true */}
-      {isLoading && (
-        <div className="loading-overlay">
-          <div className="loading-spinner"></div>
-        </div>
       )}
     </div>
   );
