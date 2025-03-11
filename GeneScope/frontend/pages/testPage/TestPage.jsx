@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { useEffect, useRef, useState } from 'react';
-import './TestPage.css'; // Import the CSS file <button class="citation-flag" data-index="2"><button class="citation-flag" data-index="5"><button class="citation-flag" data-index="9">
+import './TestPage.css'; 
 
 const Histogram = ({ data, columnLabel }) => {
   const svgRef = useRef();
