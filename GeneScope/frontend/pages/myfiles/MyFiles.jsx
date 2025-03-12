@@ -124,11 +124,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
       if (!response.ok) throw new Error("Failed to add job to queue");
 
-      setFileNames((prevFileNames) =>
-        prevFileNames.map((name) =>
-          name === selectedFile ? `${name}-waiting` : name
-        )
-      );
+
 
       // Refresh in-progress files after job submission
       fetchInProgressFiles();
@@ -211,24 +207,61 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  // Download a processed file from S3
-  const handleDownload = async (fileName) => {
+  const handleDownloadProcessedFiles = async (fileName) => {
+    if (!fileName) {
+      Swal.fire({
+        title: "Error",
+        text: "No file selected for download.",
+        icon: "error",
+        heightAuto: false
+      });
+      return;
+    }
+  
     try {
       const fileKey = `public/${userEmail}/processed_files/${fileName}`;
       const { url } = await getUrl({ path: fileKey });
+      if (!url) {
+        throw new Error("File URL not found");
+      }
       window.open(url, "_blank");
     } catch (error) {
-      //alert("An error occurred while downloading the file.");
       Swal.fire({
         title: "Error",
-        text: `An error occurred while downloading the file.`,
-        icon: "error", 
+        text: `An error occurred while downloading the file: ${error.message}`,
+        icon: "error",
         heightAuto: false
       });
-
     }
   };
 
+  const handleDownloadAllFiles = async (fileName) => {
+    if (!fileName) {
+      Swal.fire({
+        title: "Error",
+        text: "No file selected for download.",
+        icon: "error",
+        heightAuto: false
+      });
+      return;
+    }
+  
+    try {
+      const fileKey = `public/${userEmail}/my_files/${fileName}`;
+      const { url } = await getUrl({ path: fileKey });
+      if (!url) {
+        throw new Error("File URL not found");
+      }
+      window.open(url, "_blank");
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: `An error occurred while downloading the file: ${error.message}`,
+        icon: "error",
+        heightAuto: false
+      });
+    }
+  };
   // When a processed file is selected, fetch its content as a text file,
   // grab the first row, parse the comma-separated scores, and call the Python backend.
   const handleProcessedFileSelection = async (file) => {
@@ -356,7 +389,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                 setSelectedFile(null);
               }}
             >
-              In Progress
+              Files In Progress
             </button>
             <button
               className={`file-button ${
@@ -391,7 +424,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       // }}
                       onClick={() => setSelectedFile(selectedFile === file ? null : file)}
                     >
-                      {selectedFile === file && (
+                      {selectedFile === file && view !=="waiting" &&(
                       <button
                         className="delete-button"
                         onClick={(e) => {
@@ -424,22 +457,44 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
           {/* Action Buttons */}
           <div className="action-buttons">
-            {view === "processed" ? (
-              <button
-                className="start-job-button glass"
-                onClick={() => handleProcessedFileSelection(selectedFile)}
-                disabled={!selectedFile}
-              >
-                Generate Feedback
-              </button>
-            ) : (
-              <button
-                className="start-job-button glass"
-                onClick={handleStartJob}
-                disabled={!selectedFile}
-              >
-                Start Job
-              </button>
+            {view !== "waiting" && (
+              <>
+                {view === "processed" ? (
+                  <>
+                    <button
+                      className="start-job-button glass"
+                      onClick={() => handleProcessedFileSelection(selectedFile)}
+                      disabled={!selectedFile}
+                    >
+                      Generate Feedback
+                    </button>
+                    <button
+                      className="download-button glass"
+                      onClick={() => handleDownloadProcessedFiles(selectedFile)}
+                      disabled={!selectedFile}
+                    >
+                      Download Processed File
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="start-job-button glass"
+                      onClick={handleStartJob}
+                      disabled={!selectedFile}
+                    >
+                      Start Job
+                    </button>
+                    <button
+                      className="download-button glass"
+                      onClick={() => handleDownloadAllFiles(selectedFile)}
+                      disabled={!selectedFile}
+                    >
+                      Download File
+                    </button>
+                  </>
+                )}
+              </>
             )}
           </div>
         </main>
