@@ -107,6 +107,7 @@ html, body, .App {
   /* 360 spinning */
   animation: spin 5s linear infinite; 
   transform-style: preserve-3d;
+  transform-origin: center center;
 }
 
 .info-box p {
@@ -181,6 +182,7 @@ html, body, .App {
   display: flex;
   justify-content: center; 
   align-items: center;
+  /* perspective: 1000px; */
 }
 
 .about-content {

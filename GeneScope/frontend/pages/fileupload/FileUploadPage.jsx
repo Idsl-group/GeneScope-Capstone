@@ -40,7 +40,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="file-upload-logo-container">
           <img src={GeneScopeLogo} alt="Genescope Logo" className="file-upload-logo-image" />
         </div>
-        <h2>Upload DNA/RNA Files</h2>
+        <h2>Upload Files</h2>
         <div className="file-uploader-container glass">
           <FileUploader
             acceptedFileTypes={["*/*"]}
