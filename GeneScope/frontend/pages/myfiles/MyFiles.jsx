@@ -15,6 +15,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [activeButton, setActiveButton] = useState("all");
   const [feedback, setFeedback] = useState(""); // Holds generated feedback
+  const [fileText, setFileText] = useState("");
   const [showPopup, setShowPopup] = useState(false); // Controls popup visibility
   const [isLoading, setIsLoading] = useState(false); // Controls loading animation
 
@@ -160,7 +161,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       const popularity = parseFloat(parts[0].trim());
       const stability = parseFloat(parts[1].trim());
       const structure = parseFloat(parts[2].trim());
-
+  
       // Call your Python backend endpoint to run the GPT-2 code
       const pythonResponse = await fetch("http://localhost:5000/generate-feedback", {
         method: "POST",
@@ -172,8 +173,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       }
       const result = await pythonResponse.json();
       // Instead of using alert, set the feedback and show the popup
-      console.log("Generated Feedback:\n", result.feedback);
       setFeedback(result.feedback);
+      setFileText(fileText); // Set the file text
       setShowPopup(true);
     } catch (error) {
       console.error("Error processing file:", error);
@@ -314,6 +315,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       {showPopup && (
         <Popup
           feedback={feedback}
+          fileText={fileText} // Pass fileText to Popup
           onClose={() => setShowPopup(false)}
         />
       )}
