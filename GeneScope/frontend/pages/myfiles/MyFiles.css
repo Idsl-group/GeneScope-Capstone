@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
   
 }
 .file-section {
@@ -249,6 +250,30 @@
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
   }
+
+  .download-button {
+    padding: 8px 16px;
+    
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .download-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .download-button:not(:disabled) {
+    background: linear-gradient(135deg, #5c6bc0, #7a8dc9); /* Purple to Blue */
+    transition: all 0.3s ease-in-out;
+  }
+  .download-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1abc9c, #0a3d62); /* Teal to Deep Blue */
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+
   .logo-image {
     width: 300px;
     height: 300px;
