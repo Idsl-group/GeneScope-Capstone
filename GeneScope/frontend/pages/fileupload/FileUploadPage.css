@@ -35,7 +35,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px; /* space between logo and "Upload DNA/RNA Files" */
+  margin-bottom: 20px;
+  /* margin-bottom: -50px; space between logo and "Upload DNA/RNA Files" */
+  /* margin-top: -60px; space between logo and top of the page */
 }
 
 .file-upload-logo-image {
@@ -78,6 +80,7 @@
   }
 
 h2 {
+    /* margin-bottom: 10px; */
     margin-bottom: 20px;
     color: #3a4b7a;
 }
@@ -132,18 +135,19 @@ h2 {
 
 /* Style the "Browse files" button and text inside the dropzone */
 .amplify-button.amplify-field-group__control.amplify-fileuploader__file__picker {
-  background-color: #5c6bc0;
+  background: linear-gradient(135deg, #3a4b7a, #5c6bc0);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   padding: 10px 16px;
   box-shadow: 0 4px 8px rgba(58, 75, 122, 0.3);
   transition: background-color 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Hover effect on the browse button */
 .amplify-button.amplify-field-group__control.amplify-fileuploader__file__picker:hover {
-  background-color: #3f51b5;
+  background: linear-gradient(135deg, #1abc9c, #0a3d62);
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
 }

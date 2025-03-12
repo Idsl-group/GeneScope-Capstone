@@ -60,8 +60,10 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
             <button
               className="cta-button"
               onClick={() =>
-                window.location.href =
-                  "https://pubs.acs.org/doi/10.1021/acssynbio.2c00462?fig=fig3&ref=pdf"
+                window.open(
+                  "https://pubs.acs.org/doi/10.1021/acssynbio.2c00462?fig=fig3&ref=pdf",
+                  "_blank"
+                )
               }
             >
               Learn More About GeneScope 🧬

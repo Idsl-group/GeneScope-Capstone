@@ -13,7 +13,6 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
     const fetchUserEmail = async () => {
       try {
         const { signInDetails } = await getCurrentUser();
-        console.log("User Email:", signInDetails.loginId);
         setUserEmail(signInDetails.loginId);
         setIsLoggedIn(true);
       } catch (error) {

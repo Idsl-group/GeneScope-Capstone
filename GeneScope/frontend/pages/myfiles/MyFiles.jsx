@@ -95,7 +95,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "question",
         text: `Please select a file first`,
-        icon: "success"
+        icon: "success",
+        heightAuto: false
       });
 
       return;
@@ -123,11 +124,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
       if (!response.ok) throw new Error("Failed to add job to queue");
 
-      setFileNames((prevFileNames) =>
-        prevFileNames.map((name) =>
-          name === selectedFile ? `${name}-waiting` : name
-        )
-      );
+
 
       // Refresh in-progress files after job submission
       fetchInProgressFiles();
@@ -136,14 +133,16 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Job Added",
         text: `Job added to queue successfully!`,
-        icon: "success"
+        icon: "success",
+        heightAuto: false
       });
     } catch (error) {
       //alert("An error occurred while starting the job.");
       Swal.fire({
         title: "Error",
         text: `An error occurred while starting the job.`,
-        icon: "error"
+        icon: "error",
+        heightAuto: false
       });
     }
   };
@@ -175,7 +174,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "File Deleted",
         text: `File "${fileName}" has been deleted.`,
-        icon: "success"
+        icon: "success", 
+        heightAuto: false
       });
 
     } catch (error) {
@@ -183,7 +183,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while deleting the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
     }
   };
@@ -200,33 +201,82 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while deleting the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
     }
   };
 
-  // Download a processed file from S3
-  const handleDownload = async (fileName) => {
+  const handleDownloadProcessedFiles = async (fileName) => {
+    if (!fileName) {
+      Swal.fire({
+        title: "Error",
+        text: "No file selected for download.",
+        icon: "error",
+        heightAuto: false
+      });
+      return;
+    }
+  
     try {
       const fileKey = `public/${userEmail}/processed_files/${fileName}`;
       const { url } = await getUrl({ path: fileKey });
+      if (!url) {
+        throw new Error("File URL not found");
+      }
       window.open(url, "_blank");
     } catch (error) {
-      //alert("An error occurred while downloading the file.");
       Swal.fire({
         title: "Error",
-        text: `An error occurred while downloading the file.`,
-        icon: "error"
+        text: `An error occurred while downloading the file: ${error.message}`,
+        icon: "error",
+        heightAuto: false
       });
-
     }
   };
 
+  const handleDownloadAllFiles = async (fileName) => {
+    if (!fileName) {
+      Swal.fire({
+        title: "Error",
+        text: "No file selected for download.",
+        icon: "error",
+        heightAuto: false
+      });
+      return;
+    }
+  
+    try {
+      const fileKey = `public/${userEmail}/my_files/${fileName}`;
+      const { url } = await getUrl({ path: fileKey });
+      if (!url) {
+        throw new Error("File URL not found");
+      }
+      window.open(url, "_blank");
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: `An error occurred while downloading the file: ${error.message}`,
+        icon: "error",
+        heightAuto: false
+      });
+    }
+  };
   // When a processed file is selected, fetch its content as a text file,
   // grab the first row, parse the comma-separated scores, and call the Python backend.
   const handleProcessedFileSelection = async (file) => {
     setSelectedFile(file);
     setIsLoading(true); // Show loading animation
+
+    if(!file) {
+      Swal.fire({
+        title: "Error",
+        text: `Please select a file first`,
+        icon: "error"
+      });
+      return;
+    }
+
     try {
       const fileKey = `public/${userEmail}/processed_files/${file}`;
       const { url } = await getUrl({ path: fileKey });
@@ -267,7 +317,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while processing the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
 
     } finally {
@@ -293,6 +344,13 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return fileName.replace(/\.[^/.]+$/, "");
   };
 
+  const truncateFileName = (fileName, maxLength = 15) => {
+    if (fileName.length > maxLength) {
+      return fileName.substring(0, maxLength) + "...";
+    }
+    return fileName;
+  };
+
   return (
     <div className="my-files-content">
       <div className="file-section">
@@ -316,6 +374,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={() => {
                 setView("all");
                 setActiveButton("all");
+                setSelectedFile(null);
               }}
             >
               All Files
@@ -327,9 +386,10 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={() => {
                 setView("waiting");
                 setActiveButton("waiting");
+                setSelectedFile(null);
               }}
             >
-              Processing Files
+              Files In Progress
             </button>
             <button
               className={`file-button ${
@@ -338,6 +398,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={() => {
                 setView("processed");
                 setActiveButton("processed");
+                setSelectedFile(null);
               }}
             >
               Processed Files
@@ -361,8 +422,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       //     handleProcessedFileSelection(file);
                       //   }
                       // }}
-                      onClick={() => setSelectedFile(file)}
+                      onClick={() => setSelectedFile(selectedFile === file ? null : file)}
                     >
+                      {selectedFile === file && view !=="waiting" &&(
                       <button
                         className="delete-button"
                         onClick={(e) => {
@@ -373,13 +435,14 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       >
                         X
                       </button>
+                      )}
                       <img
                         className="file-icon"
                         src={fileLogo}
                         alt="file icon"
                       />
                       <span className="file-name">
-                        {getFileNameWithoutExtension(file)}
+                        {truncateFileName(getFileNameWithoutExtension(file))}
                       </span>
                     </div>
                   ))}
@@ -394,22 +457,44 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
           {/* Action Buttons */}
           <div className="action-buttons">
-            {view === "processed" ? (
-              <button
-                className="start-job-button glass"
-                onClick={() => handleProcessedFileSelection(selectedFile)}
-                disabled={!selectedFile}
-              >
-                Generate Feedback
-              </button>
-            ) : (
-              <button
-                className="start-job-button glass"
-                onClick={handleStartJob}
-                disabled={!selectedFile}
-              >
-                Start Job
-              </button>
+            {view !== "waiting" && (
+              <>
+                {view === "processed" ? (
+                  <>
+                    <button
+                      className="start-job-button glass"
+                      onClick={() => handleProcessedFileSelection(selectedFile)}
+                      disabled={!selectedFile}
+                    >
+                      Generate Feedback
+                    </button>
+                    <button
+                      className="download-button glass"
+                      onClick={() => handleDownloadProcessedFiles(selectedFile)}
+                      disabled={!selectedFile}
+                    >
+                      Download Processed File
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="start-job-button glass"
+                      onClick={handleStartJob}
+                      disabled={!selectedFile}
+                    >
+                      Start Job
+                    </button>
+                    <button
+                      className="download-button glass"
+                      onClick={() => handleDownloadAllFiles(selectedFile)}
+                      disabled={!selectedFile}
+                    >
+                      Download File
+                    </button>
+                  </>
+                )}
+              </>
             )}
           </div>
         </main>

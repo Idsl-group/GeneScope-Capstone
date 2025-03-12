@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
   
 }
 .file-section {
@@ -139,7 +140,7 @@
     align-items: center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
-    border-radius: 10px;
+    border-radius: 20px;
     border-spacing: 10px;
     padding: 30px;
     text-align: right;
@@ -232,7 +233,7 @@
     
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
   }
@@ -249,12 +250,48 @@
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
   }
+
+  .download-button {
+    padding: 8px 16px;
+    
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .download-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .download-button:not(:disabled) {
+    background: linear-gradient(135deg, #5c6bc0, #7a8dc9); /* Purple to Blue */
+    transition: all 0.3s ease-in-out;
+  }
+  .download-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1abc9c, #0a3d62); /* Teal to Deep Blue */
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+
   .logo-image {
     width: 300px;
     height: 300px;
     margin: 0px;
   }
 
+  /* Smooth transition for all buttons and hover effects*/
+  .file-button,
+  .view-buttons button,
+  .file-item,
+  .file-item:hover,
+  .file-button.active,
+  .file-button.active:hover,
+  .start-job-button:not(:disabled),
+  .start-job-button:hover:not(:disabled),
+  .logout-button {
+    transition: all 0.4s ease-in-out; 
+  }
   
 
   @media (max-width: 1100px) {
@@ -285,13 +322,12 @@
 
     .file-grid{
       max-width: 400%; /* Allow full width */
-      padding: 10px;
+      padding: 20px;
       flex-direction: column;
       grid-template-columns: repeat(2, 1fr);
 
     }
     .file-item {
-      width: 100%; /* Make the box take full width */
       padding: 10px;
     }
     .file-button {

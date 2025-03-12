@@ -142,20 +142,20 @@ html, body, .App {
 }
 
 .cta-button {
-  background-color: #5c6bc0;
+  background: linear-gradient(135deg, #3a4b7a, #5c6bc0);
   color: white;
   padding: 12px 24px;
   font-size: 18px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
   animation: pulse 1.5s infinite alternate;
   margin-top: 20px;
 }
 
 .cta-button:hover {
-  background-color: #3f51b5;
+  background: linear-gradient(135deg, #1abc9c, #0a3d62);
 }
 
 @keyframes pulse {
