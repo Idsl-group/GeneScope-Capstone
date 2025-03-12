@@ -95,7 +95,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "question",
         text: `Please select a file first`,
-        icon: "success"
+        icon: "success",
+        heightAuto: false
       });
 
       return;
@@ -136,14 +137,16 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Job Added",
         text: `Job added to queue successfully!`,
-        icon: "success"
+        icon: "success",
+        heightAuto: false
       });
     } catch (error) {
       //alert("An error occurred while starting the job.");
       Swal.fire({
         title: "Error",
         text: `An error occurred while starting the job.`,
-        icon: "error"
+        icon: "error",
+        heightAuto: false
       });
     }
   };
@@ -175,7 +178,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "File Deleted",
         text: `File "${fileName}" has been deleted.`,
-        icon: "success"
+        icon: "success", 
+        heightAuto: false
       });
 
     } catch (error) {
@@ -183,7 +187,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while deleting the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
     }
   };
@@ -200,7 +205,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while deleting the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
     }
   };
@@ -216,7 +222,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while downloading the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
 
     }
@@ -267,7 +274,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       Swal.fire({
         title: "Error",
         text: `An error occurred while processing the file.`,
-        icon: "error"
+        icon: "error", 
+        heightAuto: false
       });
 
     } finally {
