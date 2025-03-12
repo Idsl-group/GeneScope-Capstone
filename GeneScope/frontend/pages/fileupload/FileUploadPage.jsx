@@ -43,7 +43,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
         <h2>Upload Files</h2>
         <div className="file-uploader-container glass">
           <FileUploader
-            acceptedFileTypes={["*/*"]}
+            acceptedFileTypes={[]}
             accessLevel="public"
             path={`${userEmail}/my_files/`}
             maxFileCount={5}

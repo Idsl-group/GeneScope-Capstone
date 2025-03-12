@@ -26,7 +26,7 @@ import "./Popup.css";
 const Histogram = ({ data, columnLabel }) => {
   const svgRef = useRef();
   const margin = { top: 20, right: 30, bottom: 40, left: 40 };
-  const width = 400 - margin.left - margin.right;
+  const width = 360 - margin.left - margin.right; // Adjusted width to fit within container
   const height = 300 - margin.top - margin.bottom;
 
   useEffect(() => {
@@ -53,10 +53,12 @@ const Histogram = ({ data, columnLabel }) => {
       .domain([0, d3.max(bins, (d) => d.length)])
       .range([height, 0]);
 
+    const barWidth = width / bins.length; // Calculate the width of each bar
+
     const svg = d3
       .select(svgRef.current)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+      .attr("preserveAspectRatio", "xMidYMid meet")
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -67,8 +69,8 @@ const Histogram = ({ data, columnLabel }) => {
       .enter()
       .append("rect")
       .attr("class", "bar")
-      .attr("x", (d) => x(d.x0))
-      .attr("width", (d) => x(d.x1) - x(d.x0))
+      .attr("x", (d, i) => i * barWidth)
+      .attr("width", barWidth - 1) // Subtract 1 to add some space between bars
       .attr("height", (d) => height - y(d.length))
       .attr("y", (d) => y(d.length));
 
@@ -88,6 +90,7 @@ const Histogram = ({ data, columnLabel }) => {
       .attr("x", width / 2)
       .attr("y", height + margin.bottom)
       .attr("text-anchor", "middle")
+      .attr("class", "x-axis-label")
       .text(columnLabel);
   }, [data, columnLabel]);
 
@@ -131,12 +134,15 @@ const Popup = ({ feedback, fileText, onClose }) => {
 
         {columns && (
           <div className="histogram-grid">
-            {columns.map((col, index) => (
-              <div key={index} className="histogram-container">
-                <h3 className="histogram-title">Column {index + 1}</h3>
-                <Histogram data={col} columnLabel={`Column ${index + 1}`} />
-              </div>
-            ))}
+            {columns.map((col, index) => {
+              const columnNames = ["Popularity Score", "Structure Score", "Stability Score"];
+              return (
+                <div key={index} className="histogram-container">
+                  <h3 className="histogram-title">{columnNames[index]}</h3>
+                  <Histogram data={col} columnLabel={columnNames[index]} />
+                </div>
+              );
+            })}
           </div>
         )}
 

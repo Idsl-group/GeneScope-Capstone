@@ -43,8 +43,14 @@
   color: #888;
 }
 
-/* svg {
-  border: 1px solid #ccc;
-  background: white;
-  margin: 20px 0;
-} */
+:root {
+  font-family: 'Orbitron', sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, a, button, span, .amplify-button.amplify-field-group__control.amplify-fileuploader__file__picker, .amplify-text, .amplify-fileuploader__dropzone__text, .x-axis-label, .histogram-title, .popup-text, .amplify-tabs__item, .amplify-tabs__item--active, .amplify-label, .amplify-input, .amplify-field-group__control{
+  font-family: 'Orbitron', sans-serif;
+}
+
+p {
+  font-weight: 700;
+}

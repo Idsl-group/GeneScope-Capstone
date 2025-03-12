@@ -21,7 +21,7 @@
     "mongoose": "^8.12.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-dropzone": "^14.3.5",
+    "react-dropzone": "^14.3.8",
     "react-router-dom": "^6.28.0",
     "sweetalert2": "^11.17.2"
   },
