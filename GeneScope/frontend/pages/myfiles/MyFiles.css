@@ -139,7 +139,7 @@
     align-items: center;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
-    border-radius: 10px;
+    border-radius: 20px;
     border-spacing: 10px;
     padding: 30px;
     text-align: right;
@@ -232,7 +232,7 @@
     
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
   }
@@ -285,13 +285,12 @@
 
     .file-grid{
       max-width: 400%; /* Allow full width */
-      padding: 10px;
+      padding: 20px;
       flex-direction: column;
       grid-template-columns: repeat(2, 1fr);
 
     }
     .file-item {
-      width: 100%; /* Make the box take full width */
       padding: 10px;
     }
     .file-button {

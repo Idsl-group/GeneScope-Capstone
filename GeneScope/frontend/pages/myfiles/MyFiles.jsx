@@ -383,6 +383,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       // }}
                       onClick={() => setSelectedFile(selectedFile === file ? null : file)}
                     >
+                      {selectedFile === file && (
                       <button
                         className="delete-button"
                         onClick={(e) => {
@@ -393,6 +394,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       >
                         X
                       </button>
+                      )}
                       <img
                         className="file-icon"
                         src={fileLogo}
