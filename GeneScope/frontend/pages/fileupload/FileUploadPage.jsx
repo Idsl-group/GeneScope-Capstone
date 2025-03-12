@@ -13,7 +13,6 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
     const fetchUserEmail = async () => {
       try {
         const { signInDetails } = await getCurrentUser();
-        console.log("User Email:", signInDetails.loginId);
         setUserEmail(signInDetails.loginId);
         setIsLoggedIn(true);
       } catch (error) {
@@ -43,7 +42,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
         <h2>Upload Files</h2>
         <div className="file-uploader-container glass">
           <FileUploader
-            acceptedFileTypes={["*/*"]}
+            acceptedFileTypes={[]}
             accessLevel="public"
             path={`${userEmail}/my_files/`}
             maxFileCount={5}

@@ -20,19 +20,6 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-/* Smooth transition for all buttons and hover effects*/
-.file-button,
-.view-buttons button,
-.file-item,
-.file-item:hover,
-.file-button.active,
-.file-button.active:hover,
-.start-job-button:not(:disabled),
-.start-job-button:hover:not(:disabled),
-.logout-button {
-  transition: all 0.4s ease-in-out; 
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
