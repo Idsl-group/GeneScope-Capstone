@@ -46,6 +46,17 @@ app.post("/api/jobs", async (req, res) => {
   }
 });
 
+// GET endpoint to retrieve jobs for a specific email and status
+app.get("/api/jobs", async (req, res) => {
+  const { email, status } = req.query;
+  try {
+    const jobs = await Job.find({ email, status });
+    res.json(jobs);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch jobs" });
+  }
+});
+
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
