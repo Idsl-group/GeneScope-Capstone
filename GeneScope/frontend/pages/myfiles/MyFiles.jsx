@@ -234,6 +234,16 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleProcessedFileSelection = async (file) => {
     setSelectedFile(file);
     setIsLoading(true); // Show loading animation
+
+    if(!file) {
+      Swal.fire({
+        title: "Error",
+        text: `Please select a file first`,
+        icon: "error"
+      });
+      return;
+    }
+
     try {
       const fileKey = `public/${userEmail}/processed_files/${file}`;
       const { url } = await getUrl({ path: fileKey });
@@ -301,6 +311,13 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return fileName.replace(/\.[^/.]+$/, "");
   };
 
+  const truncateFileName = (fileName, maxLength = 15) => {
+    if (fileName.length > maxLength) {
+      return fileName.substring(0, maxLength) + "...";
+    }
+    return fileName;
+  };
+
   return (
     <div className="my-files-content">
       <div className="file-section">
@@ -324,6 +341,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={() => {
                 setView("all");
                 setActiveButton("all");
+                setSelectedFile(null);
               }}
             >
               All Files
@@ -335,9 +353,10 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={() => {
                 setView("waiting");
                 setActiveButton("waiting");
+                setSelectedFile(null);
               }}
             >
-              Processing Files
+              In Progress
             </button>
             <button
               className={`file-button ${
@@ -346,6 +365,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={() => {
                 setView("processed");
                 setActiveButton("processed");
+                setSelectedFile(null);
               }}
             >
               Processed Files
@@ -369,8 +389,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       //     handleProcessedFileSelection(file);
                       //   }
                       // }}
-                      onClick={() => setSelectedFile(file)}
+                      onClick={() => setSelectedFile(selectedFile === file ? null : file)}
                     >
+                      {selectedFile === file && (
                       <button
                         className="delete-button"
                         onClick={(e) => {
@@ -381,13 +402,14 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                       >
                         X
                       </button>
+                      )}
                       <img
                         className="file-icon"
                         src={fileLogo}
                         alt="file icon"
                       />
                       <span className="file-name">
-                        {getFileNameWithoutExtension(file)}
+                        {truncateFileName(getFileNameWithoutExtension(file))}
                       </span>
                     </div>
                   ))}
