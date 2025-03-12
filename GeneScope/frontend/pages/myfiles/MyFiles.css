@@ -223,10 +223,14 @@
     color: #a6c8ff;
   }
   
-  .action-buttons {
-    
-    text-align: center;
-  }
+
+.action-buttons button {
+  margin-right: 10px; /* Add margin to the right of each button */
+}
+
+.action-buttons button:last-child {
+  margin-right: 0; /* Remove margin from the last button */
+}
   
   .start-job-button {
     padding: 8px 16px;

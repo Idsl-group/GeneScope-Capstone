@@ -344,7 +344,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return fileName.replace(/\.[^/.]+$/, "");
   };
 
-  const truncateFileName = (fileName, maxLength = 15) => {
+  const truncateFileName = (fileName, maxLength = 10) => {
     if (fileName.length > maxLength) {
       return fileName.substring(0, maxLength) + "...";
     }
