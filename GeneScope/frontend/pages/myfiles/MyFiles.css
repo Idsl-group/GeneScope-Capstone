@@ -225,7 +225,7 @@
   
 
 .action-buttons button {
-  margin-right: 10px; /* Add margin to the right of each button */
+  margin-right: 20px; /* Add margin to the right of each button */
 }
 
 .action-buttons button:last-child {

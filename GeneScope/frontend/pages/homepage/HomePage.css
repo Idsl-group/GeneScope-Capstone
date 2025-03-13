@@ -111,8 +111,8 @@ html, body, .App {
 }
 
 .info-box p {
-  margin-bottom: 20px; 
-  line-height: 1.6; 
+  margin-bottom: 10px; 
+  line-height: 1.5; 
 }
 
 .info-box:hover {
@@ -199,6 +199,7 @@ html, body, .App {
   font-size: 36px;
   color: #3a4b7a;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  margin-top: -40px;
 }
 
 @media (min-width: 1101px) and (max-width: 1400px) {
