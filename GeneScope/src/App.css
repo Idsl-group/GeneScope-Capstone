@@ -54,3 +54,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, span, .amplify-button.amplify-field-
 p {
   font-weight: 700;
 }
+
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #0a3d62 transparent;
+}

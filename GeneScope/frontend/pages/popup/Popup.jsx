@@ -25,7 +25,7 @@ import "./Popup.css";
 
 const Histogram = ({ data, columnLabel }) => {
   const svgRef = useRef();
-  const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+  const margin = { top: 20, right: 30, bottom: 60, left: 40 }; // Increased bottom margin to 60
   const width = 360 - margin.left - margin.right; // Adjusted width to fit within container
   const height = 300 - margin.top - margin.bottom;
 
@@ -88,7 +88,7 @@ const Histogram = ({ data, columnLabel }) => {
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", height + margin.bottom)
+      .attr("y", height + margin.bottom - 10) // Adjusted position to fit within the increased bottom margin
       .attr("text-anchor", "middle")
       .attr("class", "x-axis-label")
       .text(columnLabel);
