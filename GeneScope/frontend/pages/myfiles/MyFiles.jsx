@@ -344,7 +344,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return fileName.replace(/\.[^/.]+$/, "");
   };
 
-  const truncateFileName = (fileName, maxLength = 15) => {
+  const truncateFileName = (fileName, maxLength = 10) => {
     if (fileName.length > maxLength) {
       return fileName.substring(0, maxLength) + "...";
     }
@@ -414,15 +414,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                     <div
                       className={`file-item ${
                         selectedFile === file ? "selected" : ""
-                      }`}
+                      } ${view === "waiting" ? "no-hover" : ""}`}
                       key={index}
-                      // onClick={() => {
-                      //   setSelectedFile(file);
-                      //   if (view === "processed") {
-                      //     handleProcessedFileSelection(file);
-                      //   }
-                      // }}
-                      onClick={() => setSelectedFile(selectedFile === file ? null : file)}
+                      onClick={() => view !== "waiting" && setSelectedFile(selectedFile === file ? null : file)}
                     >
                       {selectedFile === file && view !=="waiting" &&(
                       <button

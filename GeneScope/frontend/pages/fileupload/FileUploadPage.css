@@ -85,6 +85,22 @@ h2 {
     color: #3a4b7a;
 }
 
+/* Smooth transitions */
+.file-upload-logo-container,
+.file-upload-content h2 {
+  transition: margin .7s ease-in-out;
+}
+
+/* Adjusted margins when file is uploaded */
+.file-upload-logo-container.file-uploaded {
+  margin-bottom: -50px;
+  margin-top: -60px;
+}
+
+.file-upload-content h2.file-uploaded {
+  margin-bottom: 10px;
+}
+
 .amplify-fileuploader {
     width: 100%;
     margin-bottom: 20px;
