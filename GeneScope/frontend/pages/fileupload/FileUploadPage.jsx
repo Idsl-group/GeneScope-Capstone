@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FileUploader } from "@aws-amplify/ui-react-storage";
 import { getCurrentUser } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import "./FileUploadPage.css";
 
 const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState("");
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const fileUploaderRef = useRef(null);
 
   useEffect(() => {
     const fetchUserEmail = async () => {
@@ -32,15 +34,51 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
     );
   }
 
+  useEffect(() => {
+    if (!fileUploaderRef.current) return;
+
+    const ro = new ResizeObserver((entries) => {
+      const { height } = entries[0].contentRect;
+      // console.log("Current container height:", height);
+
+      // 3) If height exceeds threshold, set isFileUploaded to true
+      //    Adjust the threshold as needed.
+      if (height > 400) {
+        setIsFileUploaded(true);
+      } else {
+        setIsFileUploaded(false);
+      }
+    });
+
+    ro.observe(fileUploaderRef.current);
+    // Cleanup observer
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div className="file-upload-content">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="fileUploadPage">
-        <div className="file-upload-logo-container">
-          <img src={GeneScopeLogo} alt="Genescope Logo" className="file-upload-logo-image" />
+        <div
+          className={`file-upload-logo-container ${
+            isFileUploaded ? "file-uploaded" : ""
+          }`}
+        >
+          <img
+            src={GeneScopeLogo}
+            alt="Genescope Logo"
+            className="file-upload-logo-image"
+          />
         </div>
-        <h2>Upload Files</h2>
-        <div className="file-uploader-container glass">
+
+        <h2 className={isFileUploaded ? "file-uploaded" : ""}>
+          Upload Files
+        </h2>
+
+        <div
+          className="file-uploader-container glass"
+          ref={fileUploaderRef}
+        >
           <FileUploader
             acceptedFileTypes={[]}
             accessLevel="public"
@@ -52,6 +90,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
             onSuccess={(result) => {
               console.log("File uploaded successfully:", result);
               alert("File uploaded successfully!");
+              // You could also do setIsFileUploaded(true) if you want
             }}
             onError={(error) => {
               console.error("Error uploading file:", error);
