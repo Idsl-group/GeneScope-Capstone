@@ -414,15 +414,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                     <div
                       className={`file-item ${
                         selectedFile === file ? "selected" : ""
-                      }`}
+                      } ${view === "waiting" ? "no-hover" : ""}`}
                       key={index}
-                      // onClick={() => {
-                      //   setSelectedFile(file);
-                      //   if (view === "processed") {
-                      //     handleProcessedFileSelection(file);
-                      //   }
-                      // }}
-                      onClick={() => setSelectedFile(selectedFile === file ? null : file)}
+                      onClick={() => view !== "waiting" && setSelectedFile(selectedFile === file ? null : file)}
                     >
                       {selectedFile === file && view !=="waiting" &&(
                       <button

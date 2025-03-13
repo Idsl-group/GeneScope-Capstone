@@ -231,7 +231,10 @@
 .action-buttons button:last-child {
   margin-right: 0; /* Remove margin from the last button */
 }
-  
+ 
+.file-item.no-hover {
+  pointer-events: none;
+}
   .start-job-button {
     padding: 8px 16px;
     
