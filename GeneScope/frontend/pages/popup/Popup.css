@@ -51,17 +51,18 @@
 
 /* Close button styling */
 .close-button {
-    background-color: #5c6bc0;
+    background: linear-gradient(135deg, #3a4b7a, #5c6bc0);
     color: #ffffff;
     border: none;
     border-radius: 6px;
     padding: 10px 16px;
     box-shadow: 0 4px 8px rgba(58, 75, 122, 0.3);
     transition: background-color 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .close-button:hover {
-    background-color: #3f51b5;
+    background: linear-gradient(135deg, #1abc9c, #0a3d62);
     transform: scale(1.05);
     transition: all 0.3s ease-in-out;
 }
@@ -119,7 +120,7 @@
   
 /* Styling for the x-axis label */
 .x-axis-label {
-    fill: white;
+    fill: #3f51b5;
 }
   
 /* Responsive adjustments for smaller screens */
