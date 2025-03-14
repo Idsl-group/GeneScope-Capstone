@@ -346,6 +346,11 @@
     .start-job-button {
       width: 100%; /* Make the button full width */
     }
+
+    .download-button {
+      margin-top: 10px;
+      width: 100%; /* Make the button full width */
+    }
   }
   /* Loading overlay with full viewport coverage */
 .loading-overlay {
