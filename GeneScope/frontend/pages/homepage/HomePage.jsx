@@ -8,7 +8,6 @@ import "./HomePage.css";
 function HomePage({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
 
-  // Check if the user is signed in
   const checkSession = async () => {
     try {
       const { tokens } = await fetchAuthSession();
@@ -23,7 +22,6 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
-  // Sign-out functionality
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -33,7 +31,6 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
-  // Run session check on component mount
   useEffect(() => {
     checkSession();
   }, []);
@@ -43,12 +40,10 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <main className="content">
         <section className="about-container">
-          {/* Left Side - Logo */}
           <div className="logo-container">
             <img src={GeneScopeLogo} alt="Genescope Logo" className="homepage-logo-image" />
           </div>
 
-          {/* Right Side - About Us Content */}
           <div className="about-content">
             <h2>About Us</h2>
             <div className="info-box glass">

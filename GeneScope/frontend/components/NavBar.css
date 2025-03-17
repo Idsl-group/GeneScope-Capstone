@@ -1,4 +1,3 @@
-/* Floating Navbar Styling */
 .floating-navbar {
     display: inline-flex; 
     align-items: center;
@@ -29,9 +28,8 @@
     letter-spacing: 1px;
 }
 
-/* Normal Nav Buttons (Desktop) */
 .nav-links {
-    display: flex; /* By default, show in a row on large screens */
+    display: flex; 
     align-items: center;
     flex-wrap: nowrap;
   }
@@ -40,7 +38,6 @@
 .nav-button {
     white-space: nowrap;
     padding: 12px 20px;
-    /* background: linear-gradient(135deg, #5c6bc0, #7a8dc9); */
     background: rgba(92, 107, 192, 0);
     color: black;
     font-size: 16px;
@@ -49,13 +46,12 @@
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); */
     position: relative;
     margin: 0 10px;
 }
 
 .nav-button:hover {
-    background: linear-gradient(135deg, #1abc9c, #0a3d62); /* Teal to Deep Blue */
+    background: linear-gradient(135deg, #1abc9c, #0a3d62); 
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -65,15 +61,15 @@
     transform: scale(0.95);
 }
 
-/* Highlight for the active tab */
+
 .nav-button.active-tab {
     background: linear-gradient(135deg, #3a4b7a, #5c6bc0);
     color: #fff;
     border: 2px solid #3a4b7a;
-    /* Optional: tweak box-shadow, add an underline, etc. */
+    
 }
 
-/* Perfectly Centered Separator Between Buttons */
+
 .floating-navbar .nav-button:not(:last-child)::after {
     content: "";
     position: absolute;
@@ -85,7 +81,7 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
-/* Hamburger Icon: Hidden on large screens */
+
 .hamburger {
     display: none; 
     flex-direction: column; 
@@ -93,16 +89,16 @@
     width: 25px;
     height: 20px; 
     cursor: pointer;
-    margin-left: 20px; /* spacing from brand */
+    margin-left: 20px; 
 }
 
 .hamburger.open span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 7px);
-    background: #3a4b7a; /* stays consistent with your color scheme */
+    background: #3a4b7a; 
 }
   
 .hamburger.open span:nth-child(2) {
-    opacity: 0; /* middle bar fades out */
+    opacity: 0; 
 }
   
 .hamburger.open span:nth-child(3) {
@@ -120,28 +116,26 @@
 }
 
 .nav-overlay {
-    display: none;                 /* Hidden by default */
+    display: none;                 
     position: fixed;
     top: -30%;
     left: 0;
-    width: 100vw;                  /* Cover the entire viewport */
+    width: 100vw;                  
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
-    z-index: 9998;                 /* Behind the nav drawer (9999) */
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 9998;                 
     transition: opacity 0.3s ease;
     opacity: 0;
 }
   
 .nav-overlay.active {
-    display: block;      /* Reveal it when active */
+    display: block;      
     opacity: 1;
 }
 
-/* Responsive: show hamburger, and switch nav to a side-drawer approach */
 @media (max-width: 850px) {
-    /* Show the hamburger icon; Hide the nav-links in a side drawer */
     .hamburger {
-      display: flex; /* now visible on small screens */
+      display: flex; 
     }
   
     .nav-links {
@@ -157,12 +151,11 @@
       z-index: 9999;  
       border-bottom-right-radius: 12px;
       background: linear-gradient(135deg, #fff 0%, #f7faff 100%);
-      border-top-right-radius: 30px;  /* bigger round corners */
+      border-top-right-radius: 30px;  
       border-bottom-right-radius: 30px;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     }
   
-    /* Slide the drawer into view when .active is toggled */
     .nav-links.active {
         transform: translateX(-20%);
     }
@@ -171,23 +164,21 @@
         display: none;
     }
   
-    /* The main navbar now only has the logo + hamburger in a row */
     .floating-navbar {
       display: flex;
       justify-content: space-between;
       width: 90%;
     }
   
-    /* If you want to style the side-drawer buttons differently, you can do that below */
     .nav-button {
       margin: 15px 0;
       width: 100%;
     }
 
     .nav-links .nav-button {
-        text-align: left;       /* Left-align text in the drawer */
-        padding: 15px 20px;     /* Increase vertical padding a bit */
-        margin: 8px 0;          /* Space between each button */
-        border-radius: 5px;     /* So the hover background looks nice */
+        text-align: left;       
+        padding: 15px 20px;     
+        margin: 8px 0;          
+        border-radius: 5px;     
     }
 }

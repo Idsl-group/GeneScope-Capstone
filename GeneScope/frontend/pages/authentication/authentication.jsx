@@ -4,22 +4,20 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../../../src/aws-exports';
 import './authentication.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 Amplify.configure(awsExports);
 
 export default function Authentication() {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   return (
     <div className="auth-container">
       <Authenticator>
         {({ signOut, user }) => {
-          // Redirect to homepage if user is signed in
           if (user) {
-            navigate('/'); // Navigate to the homepage
+            navigate('/'); 
           }
-
           return (
             <main>
               <h1>Hello {user ? user.username : 'Sign In'}</h1>

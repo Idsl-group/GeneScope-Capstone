@@ -19,7 +19,6 @@ html, body, .App {
   overflow: auto; 
   background-image: url("../../assets/Background.jpg");
   background-size: cover; 
-  
 }
 
 .logo {
@@ -73,7 +72,6 @@ html, body, .App {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  /* margin-top: 40px; */
   padding: 20px;
   animation: fadeIn 1s ease-in-out;
 }
@@ -101,8 +99,6 @@ html, body, .App {
 .homepage-logo-image {
   width: 400px;
   height: auto;
-
-  /* 360 spinning */
   animation: spin 5s linear infinite; 
   transform-style: preserve-3d;
   transform-origin: center center;
@@ -180,7 +176,6 @@ html, body, .App {
   display: flex;
   justify-content: center; 
   align-items: center;
-  /* perspective: 1000px; */
 }
 
 .about-content {
@@ -246,7 +241,7 @@ html, body, .App {
   }
 
   .content {
-    margin-top: auto; /* was 60px */
+    margin-top: auto; 
   }
 
   .about-content{
@@ -254,7 +249,7 @@ html, body, .App {
   }
 
   .about-container {
-    margin: 60px auto 0 auto; /* was 60px auto 0 auto */
+    margin: 60px auto 0 auto; 
   }
 
   .about-content h2{
@@ -264,8 +259,8 @@ html, body, .App {
 
 @media (max-width: 1100px) {
   .content {
-    margin-top: 80px; /* Ensure content starts below navbar */
-    padding: 10px; /* Reduce padding */
+    margin-top: 80px; 
+    padding: 10px; 
   }
 
   .homepage{
@@ -273,32 +268,32 @@ html, body, .App {
   }
 
   .about-container {
-    flex-direction: column; /* Stack logo and text vertically */
-    align-items: center; /* Center align */
+    flex-direction: column; 
+    align-items: center; 
     width: 90%;
   }
 
   .logo-container {
-    order: -1; /* Move logo to the top */
+    order: -1; 
   }
 
   .homepage-logo-image {
-    width: 300px; /* Reduce logo size */
+    width: 300px; 
     margin-bottom: -80px;
   }
 
   .about-content {
-    max-width: 100%; /* Allow full width */
+    max-width: 100%; 
     padding: 10px;
   }
 
   .info-box {
-    font-size: 14px; /* Reduce text size for readability */
+    font-size: 14px;
     padding: 15px;
-    width: 100%; /* Make the box take full width */
+    width: 100%; 
   }
 
   .cta-button {
-    width: 100%; /* Make the button full width */
+    width: 100%; 
   }
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FileUploader } from "@aws-amplify/ui-react-storage";
 import { getCurrentUser } from "aws-amplify/auth";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import "./FileUploadPage.css";
@@ -39,10 +38,7 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
     const ro = new ResizeObserver((entries) => {
       const { height } = entries[0].contentRect;
-      // console.log("Current container height:", height);
 
-      // 3) If height exceeds threshold, set isFileUploaded to true
-      //    Adjust the threshold as needed.
       if (height > 400) {
         setIsFileUploaded(true);
       } else {
@@ -51,7 +47,6 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
     });
 
     ro.observe(fileUploaderRef.current);
-    // Cleanup observer
     return () => ro.disconnect();
   }, []);
 
@@ -90,7 +85,6 @@ const FileUploadPage = ({ isLoggedIn, setIsLoggedIn }) => {
             onSuccess={(result) => {
               console.log("File uploaded successfully:", result);
               alert("File uploaded successfully!");
-              // You could also do setIsFileUploaded(true) if you want
             }}
             onError={(error) => {
               console.error("Error uploading file:", error);

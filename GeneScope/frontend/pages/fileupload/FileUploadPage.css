@@ -5,21 +5,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-      /* overflow: auto;
-      margin-top: auto; */
-    
-
     background-image: url("../../assets/Background.jpg");
     background-size: cover; 
   }
 
-/* Page Layout */
 .fileUploadPage {
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; Center the content */
     display: flex;
-    /* min-height: 100vh; */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -27,21 +20,16 @@
     box-sizing: border-box;
     opacity: 0;
     animation: fadeIn 0.6s forwards ease-in-out;
-    /* Adjust this value based on the width of your navbar */
 }
 
-/* Centers logo above the heading, prevents it from overflowing */
 .file-upload-logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  /* margin-bottom: -50px; space between logo and "Upload DNA/RNA Files" */
-  /* margin-top: -60px; space between logo and top of the page */
 }
 
 .file-upload-logo-image {
-  /* Adjust to your preferred dimensions */
   width: 300px;
   height: auto;
 }
@@ -53,7 +41,6 @@
 }
 
 .file-uploader-container {
-    /* Glass look */
     background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, .1);
@@ -61,37 +48,28 @@
     border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.18);
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
-
-    /* Layout & spacing */
     width: 90%;
     max-width: 600px;
     padding: 30px;
     margin-top: 20px;
     text-align: center;
-
-    /* Smooth transition on hover */
     transition: all 0.3s ease-in-out;
 }
 
 .file-uploader-container:hover {
-    /* Uncomment below line and check if content becomes blurry */
-    /* transform: scale(1.02); */
     box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.15);
   }
 
 h2 {
-    /* margin-bottom: 10px; */
     margin-bottom: 20px;
     color: #3a4b7a;
 }
 
-/* Smooth transitions */
 .file-upload-logo-container,
 .file-upload-content h2 {
   transition: margin .7s ease-in-out;
 }
 
-/* Adjusted margins when file is uploaded */
 .file-upload-logo-container.file-uploaded {
   margin-bottom: -50px;
   margin-top: -60px;
@@ -106,7 +84,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Style the main drop area for the Amplify FileUploader */
 .amplify-fileuploader__dropzone {
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
   backdrop-filter: blur(10px);
@@ -115,8 +92,6 @@ h2 {
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.18);
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
-
-  /* border: 2px dashed #3a4b7a; */
   border-radius: 12px;
   padding: 50px 20px;
   color: #3a4b7a;
@@ -134,22 +109,17 @@ h2 {
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
 }
 
-/* On hover or focus, make the border more pronounced */
 .amplify-fileuploader__dropzone:hover,
 .amplify-fileuploader__dropzone:focus-within {
   background: linear-gradient(135deg, #d3e9ff, #e5fbff);
   border-color: #2f3c62;
 }
 
-/* If the user is dragging a file over, you can style that state, too.
-   The Amplify FileUploader adds data attributes like data-dragover,
-   so you can target them if needed. */
 .amplify-fileuploader__dropzone[data-dragover="true"] {
   background: #f0faff;
   border-color: #2f3c62;
 }
 
-/* Style the "Browse files" button and text inside the dropzone */
 .amplify-button.amplify-field-group__control.amplify-fileuploader__file__picker {
   background: linear-gradient(135deg, #3a4b7a, #5c6bc0);
   color: #ffffff;
@@ -161,26 +131,22 @@ h2 {
   transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect on the browse button */
 .amplify-button.amplify-field-group__control.amplify-fileuploader__file__picker:hover {
   background: linear-gradient(135deg, #1abc9c, #0a3d62);
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
 }
 
-/* Example: style text or placeholder inside the dropzone label */
 .amplify-fileuploader__dropzone__text {
   font-weight: 500;
   font-size: 1.1em;
 }
 
-/* Constrain the file list so it scrolls once it exceeds 300px in height */
 .amplify-fileuploader__file__list {
   max-height: 300px;
   overflow-y: auto;
 }
 
-/* Optional: Hide the default scrollbar or style it */
 .amplify-fileuploader__file__list::-webkit-scrollbar {
   width: 8px;
 }
@@ -205,7 +171,6 @@ h2 {
   transition: all 0.2s ease-in-out !important; 
 }
 
-/* CSS for delete button for each file */
 .amplify-button--small {
   background-color: #5c6bc0;
   color: #ffffff;
@@ -214,7 +179,6 @@ h2 {
   padding: 10px 16px;
   box-shadow: 0 4px 8px rgba(58, 75, 122, 0.3);
   transition: background-color 0.2s ease-in-out;
-
   font-size: 0.8rem; 
   padding: 5px 10px;  
   border-radius: 4px; 
@@ -229,24 +193,20 @@ h2 {
 
 @media (max-width: 850px) {
     .fileUploadPage {
-      /* padding-top: 20%; */
       margin-top: 80px; 
       padding: 10px;
     }
   
-    /* Reduce that large 36px heading on narrower screens */
     .file-upload-content h2 {
       font-size: 36px;
     }
   
-    /* Maybe narrower container or reduced padding if you like */
     .file-uploader-container {
       padding: 20px;
       margin-top: 10px;
     }
   }
   
-  /* Even smaller phones (max-width: 480px) */
   @media (max-width: 480px) {
     .file-upload-content h2 {
       font-size: 24px;

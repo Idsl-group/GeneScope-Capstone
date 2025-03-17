@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // <-- Import useLocation
+import { useNavigate, useLocation } from "react-router-dom"; 
 import { signOut } from "aws-amplify/auth";
 import "./NavBar.css";
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // <-- Get the current location
+  const location = useLocation(); 
 
-  // Sign-out functionality
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -19,19 +18,15 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
-  // Toggles the side menu on/off
   const toggleMenu = () => {
     setMenuOpen((prevState) => !prevState);
   };
 
   return (
     <div className="floating-navbar">
-      {/* Logo / Brand */}
       <span className="nav-logo" onClick={() => navigate("/")}>
         Genescope
       </span>
-
-      {/* Hamburger icon (only visible on smaller screens) */}
       <div
         className={`hamburger ${menuOpen ? "open" : ""}`}
         onClick={toggleMenu}
@@ -46,9 +41,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
         onClick={toggleMenu}
       ></div>
 
-      {/* Nav links - slide-out drawer on mobile */}
       <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-        {/* Home button */}
         <button
           className={`nav-button ${
             location.pathname === "/" ? "active-tab" : ""
@@ -82,7 +75,6 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
           </>
         )}
 
-        {/* Log In / Log Out button - no active class logic */}
         <button
           className="nav-button"
           onClick={() =>

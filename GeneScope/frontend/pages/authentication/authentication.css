@@ -1,17 +1,16 @@
-/* authentication.css */
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
+  height: 100vh; 
+  width: 100vw; 
   background-image: url(/frontend/assets/Background.jpg);}
 
 .amplify-authenticator {
-  width: 100%; /* Ensure responsive width */
-  max-width: 400px; /* Limit width to avoid stretching */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+  width: 100%; 
+  max-width: 400px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   padding: 20px;
-  background-color: #ffffff; /* Optional: White background */
-  border-radius: 8px; /* Optional: Rounded corners */
+  background-color: #ffffff; 
+  border-radius: 8px; 
 }

@@ -5,7 +5,7 @@ import "./MyFiles.css";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
 import fileLogo from "../../assets/google-docs.png";
-import Popup from "../../pages/popup/Popup"; // Import your Popup component
+import Popup from "../../pages/popup/Popup"; 
 import Swal from "sweetalert2";
 
 
@@ -17,12 +17,11 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
   const [view, setView] = useState("all");
   const [selectedFile, setSelectedFile] = useState(null);
   const [activeButton, setActiveButton] = useState("all");
-  const [feedback, setFeedback] = useState(""); // Holds generated feedback
+  const [feedback, setFeedback] = useState(""); 
   const [fileText, setFileText] = useState("");
-  const [showPopup, setShowPopup] = useState(false); // Controls popup visibility
-  const [isLoading, setIsLoading] = useState(false); // Controls loading animation
+  const [showPopup, setShowPopup] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false); 
 
-  // Fetch user email when component loads
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
@@ -37,7 +36,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     fetchUserEmail();
   }, [setIsLoggedIn]);
 
-  // Fetch file names from S3
   useEffect(() => {
     if (!userEmail) return;
 
@@ -67,7 +65,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     fetchFiles();
   }, [userEmail]);
 
-  // Fetch "In Progress" files from MongoDB
   useEffect(() => {
     if (!userEmail) return;
 
@@ -79,7 +76,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         if (!response.ok) throw new Error("Failed to fetch in-progress files");
 
         const jobs = await response.json();
-        setInProgressFiles(jobs.map((job) => job.fileName)); // Extract file names
+        setInProgressFiles(jobs.map((job) => job.fileName)); 
       } catch (error) {
         console.error("Error fetching in-progress files:", error);
       }
@@ -88,10 +85,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     fetchInProgressFiles();
   }, [userEmail]);
 
-  // Handle Start Job: Get file URL and send it to MongoDB server
   const handleStartJob = async () => {
     if (!selectedFile) {
-      //alert("Please select a file first");
       Swal.fire({
         title: "question",
         text: `Please select a file first`,
@@ -106,10 +101,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       const fileKey = `public/${userEmail}/my_files/${selectedFile}`;
       const returnLocationUrl = `https://tepnbg3j40.execute-api.us-east-1.amazonaws.com/dev/public/${userEmail}/processed_files/${selectedFile}`;
 
-      // Fetch file URL from AWS S3
       const { url } = await getUrl({ path: fileKey });
 
-      // Send job to MongoDB server
       const response = await fetch("http://localhost:3000/api/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -126,10 +119,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
 
 
 
-      // Refresh in-progress files after job submission
       fetchInProgressFiles();
 
-      //alert("Job added to queue successfully!");
       Swal.fire({
         title: "Job Added",
         text: `Job added to queue successfully!`,
@@ -137,7 +128,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         heightAuto: false
       });
     } catch (error) {
-      //alert("An error occurred while starting the job.");
       Swal.fire({
         title: "Error",
         text: `An error occurred while starting the job.`,
@@ -157,20 +147,18 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       if (!response.ok) throw new Error("Failed to fetch in-progress files");
 
       const jobs = await response.json();
-      setInProgressFiles(jobs.map((job) => job.fileName)); // Extract file names
+      setInProgressFiles(jobs.map((job) => job.fileName)); 
     } catch (error) {
       console.error("Error fetching in-progress files:", error);
     }
   };
 
-  // Delete a file from S3 (for my_files)
   const handleDelete = async (fileName) => {
     try {
       await remove({ path: `public/${userEmail}/my_files/${fileName}` });
       setFileNames((prevFileNames) =>
         prevFileNames.filter((name) => name !== fileName)
       );
-      //alert(`File "${fileName}" has been deleted.`);
       Swal.fire({
         title: "File Deleted",
         text: `File "${fileName}" has been deleted.`,
@@ -179,7 +167,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       });
 
     } catch (error) {
-      //alert("An error occurred while deleting the file.");
       Swal.fire({
         title: "Error",
         text: `An error occurred while deleting the file.`,
@@ -189,7 +176,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  // Delete a file from processed_files
   const handleDeleteProcessed = async (fileName) => {
     try {
       await remove({ path: `public/${userEmail}/processed_files/${fileName}` });
@@ -197,7 +183,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         prevFiles.filter((name) => name !== fileName)
       );
     } catch (error) {
-      //alert("An error occurred while deleting the file.");
       Swal.fire({
         title: "Error",
         text: `An error occurred while deleting the file.`,
@@ -262,11 +247,10 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       });
     }
   };
-  // When a processed file is selected, fetch its content as a text file,
-  // grab the first row, parse the comma-separated scores, and call the Python backend.
+
   const handleProcessedFileSelection = async (file) => {
     setSelectedFile(file);
-    setIsLoading(true); // Show loading animation
+    setIsLoading(true); 
 
     if(!file) {
       Swal.fire({
@@ -281,10 +265,8 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       const fileKey = `public/${userEmail}/processed_files/${file}`;
       const { url } = await getUrl({ path: fileKey });
 
-      // Fetch the file as text
       const response = await fetch(url);
       const fileText = await response.text();
-      // Grab the first row and split by comma
       const firstRow = fileText.split("\n")[0];
       const parts = firstRow.split(",");
       if (parts.length < 3) {
@@ -294,7 +276,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       const stability = parseFloat(parts[1].trim());
       const structure = parseFloat(parts[2].trim());
   
-      // Call your Python backend endpoint to run the GPT-2 code
       const pythonResponse = await fetch(
         "http://localhost:5000/generate-feedback",
         {
@@ -307,13 +288,11 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
         throw new Error("Python endpoint error");
       }
       const result = await pythonResponse.json();
-      // Instead of using alert, set the feedback and show the popup
       setFeedback(result.feedback);
-      setFileText(fileText); // Set the file text
+      setFileText(fileText); 
       setShowPopup(true);
     } catch (error) {
       console.error("Error processing file:", error);
-      //alert("An error occurred while processing the file.");
       Swal.fire({
         title: "Error",
         text: `An error occurred while processing the file.`,
@@ -322,7 +301,7 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       });
 
     } finally {
-      setIsLoading(false); // Hide loading animation
+      setIsLoading(false); 
     }
   };
 
@@ -330,14 +309,13 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
     return <h2>Please log in to view your files.</h2>;
   }
 
-  // Update the file list based on the selected view
   let filteredFiles = [];
   if (view === "processed") {
     filteredFiles = processedFiles;
   } else if (view === "waiting") {
-    filteredFiles = inProgressFiles; // Use MongoDB files for "Processing Files"
+    filteredFiles = inProgressFiles; 
   } else {
-    filteredFiles = fileNames; // Default to My Files
+    filteredFiles = fileNames; 
   }
 
   const getFileNameWithoutExtension = (fileName) => {
@@ -365,7 +343,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
           <h2 className="page-title">My Files</h2>
 
-          {/* View Selection Buttons */}
           <div className="view-buttons glass">
             <button
               className={`file-button ${
@@ -405,7 +382,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
             </button>
           </div>
 
-          {/* File List */}
           <div className="file-grid-container">
             <div className="file-grid glass">
               {filteredFiles.length > 0 ? (
@@ -449,7 +425,6 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="action-buttons">
             {view !== "waiting" && (
               <>
@@ -493,15 +468,13 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </main>
       </div>
-      {/* Render Popup when feedback is available */}
       {showPopup && (
         <Popup
           feedback={feedback}
-          fileText={fileText} // Pass fileText to Popup
+          fileText={fileText} 
           onClose={() => setShowPopup(false)}
         />
       )}
-      {/* Render loading animation when isLoading is true */}
       {isLoading && (
         <div className="loading-overlay">
           <div className="loading-spinner"></div>
