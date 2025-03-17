@@ -59,3 +59,19 @@ html, body {
   scrollbar-width: thin;
   scrollbar-color: #0a3d62 transparent;
 }
+
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 1.5px solid #7e7e7e;
+  border-radius: 8px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 2px solid #616161;
+  border-radius: 8px;
+}
