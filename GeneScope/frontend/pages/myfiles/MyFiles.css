@@ -225,7 +225,7 @@
   
 
 .action-buttons button {
-  margin-right: 10px; /* Add margin to the right of each button */
+  margin-right: 20px; /* Add margin to the right of each button */
 }
 
 .action-buttons button:last-child {
@@ -344,6 +344,11 @@
     }
   
     .start-job-button {
+      width: 100%; /* Make the button full width */
+    }
+
+    .download-button {
+      margin-top: 10px;
       width: 100%; /* Make the button full width */
     }
   }
