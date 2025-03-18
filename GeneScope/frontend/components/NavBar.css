@@ -133,52 +133,202 @@
     opacity: 1;
 }
 
+.floating-navbar {
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding-top: 35px;
+    padding-bottom: 35px;
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 90%; 
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 60px;
+}
+
+.nav-logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #3a4b7a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex; 
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  
+
+.nav-button {
+    white-space: nowrap;
+    padding: 12px 20px;
+    background: rgba(92, 107, 192, 0);
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin: 0 10px;
+}
+
+.nav-button:hover {
+    background: linear-gradient(135deg, #1abc9c, #0a3d62); 
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-button:active {
+    transform: scale(0.95);
+}
+
+
+.nav-button.active-tab {
+    background: linear-gradient(135deg, #3a4b7a, #5c6bc0);
+    color: #fff;
+    border: 2px solid #3a4b7a;
+    
+}
+
+
+.floating-navbar .nav-button:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translate(50%, -50%);
+    height: 60%;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+.hamburger {
+    display: none; 
+    flex-direction: column; 
+    justify-content: space-between;
+    width: 25px;
+    height: 20px; 
+    cursor: pointer;
+    margin-left: 20px; 
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 7px);
+    background: #3a4b7a; 
+}
+  
+.hamburger.open span:nth-child(2) {
+    opacity: 0; 
+}
+  
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+    background: #3a4b7a;
+}
+  
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #3a4b7a; 
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.nav-overlay {
+    display: none;                 
+    position: fixed;
+    top: -30%;
+    left: 0;
+    width: 100vw;                  
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 9998;                 
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+  
+.nav-overlay.active {
+    display: block;      
+    opacity: 1;
+}
+
 @media (max-width: 850px) {
+    /* Display the hamburger icon */
     .hamburger {
-      display: flex; 
-    }
-  
-    .nav-links {
-      position: fixed;
-      top: -30%;
-      left: 0;
-      width: 240px;
-      height: 100vh;
-      flex-direction: column;
-      padding: 80px 20px;      
-      transform: translateX(-120%); 
-      transition: transform 0.3s ease;
-      z-index: 9999;  
-      border-bottom-right-radius: 12px;
-      background: linear-gradient(135deg, #fff 0%, #f7faff 100%);
-      border-top-right-radius: 30px;  
-      border-bottom-right-radius: 30px;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    }
-  
-    .nav-links.active {
-        transform: translateX(-20%);
+      display: flex;
     }
 
     .floating-navbar .nav-button:not(:last-child)::after {
-        display: none;
+        content: "";
+        position: absolute;
+        right: 0px;
+        top: 0%;
+        height: 0%;
+        width: 0px;
+        background: rgba(0, 0, 0, 0.2);
     }
-  
+    
+    /* Hide the overlay if not needed for dropdown behavior */
+    .nav-overlay {
+      display: none;
+    }
+    
+    /* Make the navbar container relative so the dropdown positions correctly */
     .floating-navbar {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-    }
-  
-    .nav-button {
-      margin: 15px 0;
       width: 100%;
+      padding: 15px 20px;
+      justify-content: space-between;
+    }
+    
+    /* Style the nav-links container as a dropdown */
+    .nav-links {
+        position: absolute;
+        top: 60px; /* Adjust to match navbar height */
+        left: 0;
+        width: 100%; /* Full width */
+        background: white; /* Ensure it's not transparent */
+        flex-direction: column;
+        opacity: 0; /* Initially hidden */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        max-height: 0; /* Initially set max-height to 0 */
+        overflow: hidden; /* Hide overflow */
+        border-radius: 0 0 50px 50px; /* Add rounded corners to the bottom */
     }
 
-    .nav-links .nav-button {
-        text-align: left;       
-        padding: 15px 20px;     
-        margin: 8px 0;          
-        border-radius: 5px;     
+    .nav-links.active {
+        opacity: 1; /* Show when active */
+        max-height: 500px; /* Set a max-height when active */
     }
+    
+    /* Update button styles for full-width dropdown options */
+    .nav-button {
+      width: 100%;
+      margin: 0;
+      padding: 10px 20px;
+      text-align: left;
+      border: none;
+      background: transparent;
+    }
+    .floating-navbar.active {
+        border-radius: 50px 50px 0 0;
+        transition: border-radius 0.4s ease-in-out;
+      }
 }
