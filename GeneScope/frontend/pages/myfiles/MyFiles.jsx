@@ -390,29 +390,37 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
                     <div
                       className={`file-item ${
                         selectedFile === file ? "selected" : ""
-                      } ${view === "waiting" ? "no-hover" : ""}`}
+                      }`}
                       key={index}
-                      onClick={() => view !== "waiting" && setSelectedFile(selectedFile === file ? null : file)}
+                      onClick={() => setSelectedFile(selectedFile === file ? null : file)}
                     >
-                      {selectedFile === file && view !=="waiting" &&(
-                      <button
-                        className="delete-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(file);
-                          handleDeleteProcessed(file);
-                        }}
-                      >
-                        X
-                      </button>
+                      {selectedFile === file && view !== "waiting" && (
+                        <button
+                          className="delete-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(file);
+                            handleDeleteProcessed(file);
+                          }}
+                        >
+                          X
+                        </button>
                       )}
                       <img
                         className="file-icon"
                         src={fileLogo}
                         alt="file icon"
                       />
-                      <span className="file-name">
-                        {truncateFileName(getFileNameWithoutExtension(file))}
+                      <span
+                        className={`file-name ${
+                          selectedFile === file && getFileNameWithoutExtension(file).length > 15
+                            ? "small-font"
+                            : ""
+                        }`}
+                      >
+                        {selectedFile === file
+                          ? getFileNameWithoutExtension(file)
+                          : truncateFileName(getFileNameWithoutExtension(file))}
                       </span>
                     </div>
                   ))}
@@ -471,8 +479,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       {showPopup && (
         <Popup
           feedback={feedback}
-          fileText={fileText} 
+          fileText={fileText}
           onClose={() => setShowPopup(false)}
+          selectedFileName={getFileNameWithoutExtension(selectedFile)} // Pass the selected file name
         />
       )}
       {isLoading && (
