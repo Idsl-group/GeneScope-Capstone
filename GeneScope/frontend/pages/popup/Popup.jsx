@@ -1,38 +1,18 @@
-// // Popup.js
-// import React from "react";
-// import "./Popup.css";
-
-// const Popup = ({ feedback, fileText, onClose }) => {
-//   return (
-//     <div className="popup-overlay">
-//       <div className="popup-container">
-//         <h1>Generated Feedback</h1>
-//         <pre className="popup-text">{feedback}</pre>
-//         <div class="close-button-container">
-//             <button class="close-button"onClick={onClose}>Close</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Popup;
-
-// Popup.js
 import React, { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import "./Popup.css";
 
 const Histogram = ({ data, columnLabel }) => {
   const svgRef = useRef();
-  const margin = { top: 20, right: 30, bottom: 60, left: 40 }; // Increased bottom margin to 60
-  const width = 360 - margin.left - margin.right; // Adjusted width to fit within container
+  const margin = { top: 20, right: 30, bottom: 60, left: 40 }; 
+  const width = 360 - margin.left - margin.right; 
   const height = 300 - margin.top - margin.bottom;
 
   useEffect(() => {
     if (!data?.length) return;
 
-    // Clear any previous SVG content before drawing
     d3.select(svgRef.current).selectAll("*").remove();
 
     const histogram = d3
@@ -53,7 +33,7 @@ const Histogram = ({ data, columnLabel }) => {
       .domain([0, d3.max(bins, (d) => d.length)])
       .range([height, 0]);
 
-    const barWidth = width / bins.length; // Calculate the width of each bar
+    const barWidth = width / bins.length; 
 
     const svg = d3
       .select(svgRef.current)
@@ -62,7 +42,6 @@ const Histogram = ({ data, columnLabel }) => {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Draw the bars with a CSS class for styling
     svg
       .selectAll("rect")
       .data(bins)
@@ -70,25 +49,22 @@ const Histogram = ({ data, columnLabel }) => {
       .append("rect")
       .attr("class", "bar")
       .attr("x", (d, i) => i * barWidth)
-      .attr("width", barWidth - 1) // Subtract 1 to add some space between bars
+      .attr("width", barWidth - 1) 
       .attr("height", (d) => height - y(d.length))
       .attr("y", (d) => y(d.length));
 
-    // Draw x-axis
     svg
       .append("g")
       .attr("transform", `translate(0,${height})`)
       .call(d3.axisBottom(x))
       .attr("class", "axis");
 
-    // Draw y-axis
     svg.append("g").call(d3.axisLeft(y)).attr("class", "axis");
 
-    // Add x-axis label
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", height + margin.bottom - 10) // Adjusted position to fit within the increased bottom margin
+      .attr("y", height + margin.bottom - 10) 
       .attr("text-anchor", "middle")
       .attr("class", "x-axis-label")
       .text(columnLabel);
@@ -100,22 +76,20 @@ const Histogram = ({ data, columnLabel }) => {
 const Popup = ({ feedback, fileText, onClose }) => {
   const [columns, setColumns] = useState(null);
   const [error, setError] = useState(null);
+  const popupRef = useRef();
 
   useEffect(() => {
     if (!fileText) return;
     try {
-      // Parse the file text (expecting CSV rows separated by newlines)
       const rows = fileText
         .trim()
         .split("\n")
         .map((line) => line.split(",").map(Number));
 
-      // Ensure each row has 3 columns; adjust this as needed for your data
       if (!rows.every((row) => row.length === 3)) {
         throw new Error("Invalid file format - expected 3 columns");
       }
 
-      // Transpose rows into columns so that each column becomes an array
       const transposed = rows[0].map((_, i) => rows.map((row) => row[i]));
       setColumns(transposed);
       setError(null);
@@ -124,9 +98,32 @@ const Popup = ({ feedback, fileText, onClose }) => {
     }
   }, [fileText]);
 
+  const handleDownloadPDF = async () => {
+    const pdf = new jsPDF();
+    const element = popupRef.current;
+
+    pdf.text("Generated Feedback", 10, 10);
+    const lines = pdf.splitTextToSize(feedback, 180);
+    pdf.text(lines, 10, 20);
+
+    for (let i = 0; i < element.querySelectorAll('.histogram-container').length; i++) {
+      const histogramElement = element.querySelectorAll('.histogram-container')[i];
+      const canvas = await html2canvas(histogramElement);
+      const imgData = canvas.toDataURL("image/png");
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 10, 10, pdfWidth - 20, pdfHeight);
+    }
+
+    pdf.save("insights.pdf");
+  };
+
   return (
     <div className="popup-overlay">
-      <div className="popup-container">
+      <div className="popup-container" ref={popupRef}>
         <h1>Generated Feedback</h1>
         <pre className="popup-text">{feedback}</pre>
         
@@ -146,7 +143,10 @@ const Popup = ({ feedback, fileText, onClose }) => {
           </div>
         )}
 
-        <div className="close-button-container">
+        <div className="button-container">
+          <button className="download-button" onClick={handleDownloadPDF}>
+            Download File
+          </button>
           <button className="close-button" onClick={onClose}>
             Close
           </button>

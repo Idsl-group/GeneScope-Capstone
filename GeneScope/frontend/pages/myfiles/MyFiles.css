@@ -303,14 +303,20 @@
   .logout-button {
     transition: all 0.4s ease-in-out; 
   }
-  
-
+.small-font{
+  font-size: 0.8em;
+}
   @media (max-width: 1100px) {
     .root {
       margin-top: 80px; 
       padding: 10px; 
     }
-  
+    .action-buttons {
+      display: contents;
+    }
+    .action-buttons button {
+      margin-right: 0px; 
+    }
     .myFilesPage {
       flex-direction: column;
       margin-top: 60px;
@@ -348,13 +354,11 @@
       width: 100%; 
     }
   
-    .start-job-button {
-      width: 100%; 
-    }
+
 
     .download-button {
       margin-top: 10px;
-      width: 100%; 
+      
     }
   }
 
