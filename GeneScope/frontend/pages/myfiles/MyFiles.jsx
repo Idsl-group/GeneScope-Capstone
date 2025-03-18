@@ -479,8 +479,9 @@ const MyFiles = ({ isLoggedIn, setIsLoggedIn }) => {
       {showPopup && (
         <Popup
           feedback={feedback}
-          fileText={fileText} 
+          fileText={fileText}
           onClose={() => setShowPopup(false)}
+          selectedFileName={getFileNameWithoutExtension(selectedFile)} // Pass the selected file name
         />
       )}
       {isLoading && (

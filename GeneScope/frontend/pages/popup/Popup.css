@@ -133,4 +133,7 @@
     .histogram-title {
         font-size: 1.5em;
     }
+    .button-container {
+        flex-direction: column;
+    }
 }

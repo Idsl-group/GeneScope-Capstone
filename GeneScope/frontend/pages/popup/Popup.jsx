@@ -73,7 +73,7 @@ const Histogram = ({ data, columnLabel }) => {
   return <svg ref={svgRef} />;
 };
 
-const Popup = ({ feedback, fileText, onClose }) => {
+const Popup = ({ feedback, fileText, onClose, selectedFileName }) => {
   const [columns, setColumns] = useState(null);
   const [error, setError] = useState(null);
   const popupRef = useRef();
@@ -118,7 +118,7 @@ const Popup = ({ feedback, fileText, onClose }) => {
       pdf.addImage(imgData, "PNG", 10, 10, pdfWidth - 20, pdfHeight);
     }
 
-    pdf.save("insights.pdf");
+    pdf.save(`${selectedFileName} insights.pdf`);
   };
 
   return (
