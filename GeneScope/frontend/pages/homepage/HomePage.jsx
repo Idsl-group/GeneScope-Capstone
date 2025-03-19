@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchAuthSession, signOut } from "aws-amplify/auth";
 import GeneScopeLogo from "../../assets/GenescopeLogo.png";
 import Navbar from "../../components/NavBar";
+import ResearchPaper from "../../assets/Learn More Research Paper.pdf";
 import "./HomePage.css";
 
 function HomePage({ isLoggedIn, setIsLoggedIn }) {
@@ -55,10 +56,7 @@ function HomePage({ isLoggedIn, setIsLoggedIn }) {
             <button
               className="cta-button"
               onClick={() =>
-                window.open(
-                  "https://pubs.acs.org/doi/10.1021/acssynbio.2c00462?fig=fig3&ref=pdf",
-                  "_blank"
-                )
+                window.open(ResearchPaper, "_blank")
               }
             >
               Learn More About GeneScope 🧬
