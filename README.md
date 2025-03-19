@@ -2,6 +2,8 @@
 
 ## How to run
 - cd GeneScope
+- npm install
+- pip install -r requirements.txt
 - npm run dev 
 
 ## Backend
